@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng2-bootstrap/x.x.x/ng2-bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>EA PAGE</title>
+    <script language="javascript">
+        var SBpath = "./";	//SBGrid v2.5 Library인 'SBGrid'폴더 상대경로
+    </script>
+    <script src="./SBGrid/SBGrid_Lib.js" type="text/javascript"></script>
+    <script src="./SBGrid/SBGrid_min.js" type="text/javascript"></script>
+    <link href="./SBGrid/css/SBGrid.css" rel="stylesheet" type="text/css">
+    <link href="./SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css">
+    <script src="./EAPage.js" type="text/javascript"></script>
+    
+</head>
+<body style="padding: 20px">
+    <div>
+        <h2 style="text-align: center">Veteran 질의서(EA용)</h2>
+    </div>
+    <div id="EA" style="width : 720px; height : 700px" ></div>
+    <div>
+        <button id="save" onclick="saveAll()">저장하기</button>
+        <button id="next" onclick="veteranPage()">Veteran 페이지로 이동</button>
+    </div>
+</body>
+</html>

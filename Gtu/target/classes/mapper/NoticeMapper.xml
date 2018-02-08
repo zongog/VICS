@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="store.mapper.NoticeMapper">
+  
+  
+  <insert id="createNotice" parameterType="Notice">
+  <selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select Notice_seq.nextval from dual
+  </selectKey>
+  Insert into Notice_tb(id, title, content, hits, n_date, attachment)
+  Values(#{id}, #{title}, #{content}, 0, SYSDATE, #{attachment})
+  </insert>
+  
+  <select id="findAll" resultType="Notice">
+  select id, title, content, hits, n_date, attachment from Notice_tb
+  </select>  
+  
+  <select id="findById" resultType="Notice" parameterType="int">
+  	select id, title, content, hits, n_date, attachment from Notice_tb where id = #{id}
+  </select>
+  
+  <delete id="deleteNotice" parameterType="int">
+  delete from Notice_tb where id = #{id}
+  </delete>
+  
+  <update id="updateNotice" parameterType="Notice">
+  update Notice_tb set title = #{title},
+  						content = #{content},
+  						hits = #{hits} where id=#{id}
+  
+  </update>
+  
+  </mapper>

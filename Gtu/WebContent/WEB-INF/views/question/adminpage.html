@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+    <script language="javascript">
+        var SBpath = "./";	//SBGrid v2.5 Library인 'SBGrid'폴더 상대경로
+    </script>
+    <script src="./SBGrid/SBGrid_Lib.js" type="text/javascript"></script>
+    <script src="./SBGrid/SBGrid_min.js" type="text/javascript"></script>
+    <link href="./SBGrid/css/SBGrid.css" rel="stylesheet" type="text/css">
+    <link href="./SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css">
+    <script src="./ADMINPage.js" type="text/javascript"></script>
+    
+    
+    
+    
+</head>
+<body style="padding: 20px">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Admin 가이드</h4>
+            </div>
+            <div class="modal-body">
+                <h4>1.질문번호는 다음과 같은 규칙으로 부여됩니다.</h4><br>
+                1 :  상위 질문에 대한 답변이 <b>YES</b>일 경우<br>
+                2 :  상위 질문에 대한 답변이 <b>NO</b>일 경우
+                    <h5>(예시)</h5>
+                    1.1 : 1번 질문에 YES를 답했을 경우 생성되는 하위 질문 번호<br>
+                    1.2 : 1번 질문에 NO를 답했을 경우 생성되는 하위 질문 번호<br>
+                    2.1.2.1 : 2번 질문부터 Y -> N -> Y 를 답했을 경우 생성되는 하위 질문 번호<br><br><br>
+
+
+                <h4>2.<b>[주의]</b>특정 질문을 삭제할 경우 하위 질문들도 다 같이 삭제됩니다.</h4>
+                <h5>(예시)</h5>
+                    질문이 1, 1.1, 1.1.1이 있을 경우 <br>
+                    1을 삭제하게 되면 1.1과 1.1.1이 모두 삭제됩니다.<br>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<h2 style="text-align: center">Veteran 질의서 생성(Admin용)</h2>
+<div><p>질의서 제목 : </p> <input type="text" name="version_title" class="form-control" style="margin-left:30px; width: 500px"></div><br>
+<div>
+    <button id="createQuestion" onclick="createQuestion()" style="width: 150px; height:70px; font-family: HY나무B; font-size: 1em; background-color: #8cd0d3; margin-right: 20px">대질문 생성</button>
+    <button id="saveQuestions" onclick="saveQuestions()" style="width: 150px; height:70px; font-family: HY나무B; font-size: 1em; background-color: #e0ffcc; margin-right: 20px">저장</button>
+    <button id="EAPage" onclick="showIndex()" style="width: 150px; height:70px; font-family: HY나무B;font-size: 1em; background-color: #d3bec8;margin-right: 20px">EA 페이지로 이동</button>
+    <button id="help" class="btn btn-primary" data-toggle="modal" data-target="#myModal"  style="width: 150px; height:70px; font-family: HY나무B;font-size: 1em;">Admin 가이드</button>
+    <br /> <br />
+    <div id="admin" style="width : 1500px; height : 700px; font-family: HY나무B"></div>
+</div>
+</body>
+</html>
