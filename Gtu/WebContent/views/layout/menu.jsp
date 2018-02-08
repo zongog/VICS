@@ -2,31 +2,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <link href="resources/css/bootstrap_modify.css" rel="stylesheet" type="text/css" />
-<style>
-.navbar-brands {
-    float: left;
-    padding: 40px 1px;
-    font-size: 16px;
-    line-height: 11px;
-}
-
-.navbar-brandss {
-    float: left;
-    padding: 60px 10px;
-    font-size: 16px;
-    line-height: 11px;
-}
-</style>
 
 <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container" style="margin-left: 0; margin-right: 0">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-           	<img width = "240" height = "80" src="resources/images/VICS.png"></a>
+            <a class="navbar-brand" style="margin-left: 0px;" href="#">
+           	<img width=500 height="90" alt="VICS" src="resources/images/VICS.png"></a>
         </div>
-        	<h2 class="navbar-brands">${loginedUser.name}님 환영합니다.</h2>
+        	<p class="navbar-brands">${loginedUser.name}님 환영합니다.</p>
             <a class="navbar-brandss" href="${pageContext.request.contextPath}/logout.do"> [로그아웃]</a>
             <a class="navbar-brandss" href="#">[정보수정]</a>
     </div>
-    
 </div>
+
+
+<div class="containers">
+	<div class="col-lg-12">
+		<div class="jumbotron">
+			<h2>${categoryDetail.categoryName}</h2>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12 col-lg-12">
+		<ul class="nav nav-pills">
+		  <li role="presentation"><a href="${pageContext.request.contextPath}/noticAll.do">공지사항</a></li>
+		  <%-- <c:if test="${id eq 'cpa'}"> --%>
+		  <li role="presentation"><a href="${pageContext.request.contextPath}/questionList.do">질의서 관리</a></li>
+		  <%-- </c:if> --%>
+		  
+		  <%-- <c:if test="${id eq 'ea'}"> --%>
+		  <li role="presentation"><a href="${pageContext.request.contextPath}/eaList.do">질의서 관리</a></li>
+		  <%-- </c:if> --%>
+		  
+		  <li role="presentation"><a href="findAllQnA.do">QnA 게시판</a></li>
+		  <li role="presentation"><a href="#">회원 관리</a></li>
+		</ul>
+	</div>
+</div>
+		

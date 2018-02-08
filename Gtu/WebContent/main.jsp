@@ -146,27 +146,7 @@ nav li a:before {
 
 	<!-- Main Navigation ================================================================================= -->
 	<%@ include file="/views/layout/menu.jsp"%>
-	<!-- Header ========================================================================================== -->
-		<div class="containers">
-				<div class="col-lg-12">
-					<div class="jumbotron">
-						<h2>${categoryDetail.categoryName }</h2>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-12 col-lg-12">
-					<ul id="nav">
-									<li class="active"><a href="noticAll.do">[공지사항]</a></li>
-									<li><a href="questionList.do">[질의서 관리]</a></li>
-									<li><a href="findAllQnA.do">[QnA 게시판]</a></li>
-									<li><a href="#">[회원 관리]</a></li>
-					</ul>
-				</div>
-			</div>
-		
-		
-		
+	
 	<!-- Container ======================================================================================= -->
 	<div class="containers">
 			<div class="col-sm-9 col-lg-9">
