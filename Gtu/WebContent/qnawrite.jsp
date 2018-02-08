@@ -9,7 +9,7 @@
 	type="text/css" />
 <title>소셜보드</title>
 
-<style type="text/css">
+<style type="text/css"> 
 .col-lg-12 {
 	margin: 0;
 	padding: 0;
