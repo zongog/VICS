@@ -21,7 +21,7 @@ public class AnswerController {
 	@Autowired
 	private QnAService qnaservice;
 	
-	@RequestMapping("/registanswer.do")//->안됨
+	@RequestMapping("/registanswer.do")
 	   public ModelAndView registanswer(Comment comment, int qna_id) {
 		
 		answerservice.RegistAnswer(comment);

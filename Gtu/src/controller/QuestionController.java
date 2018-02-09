@@ -8,6 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.QuestionDTO;
+import service.Member_Service;
 import service.QuestionService;
 
 @Controller
@@ -23,6 +25,9 @@ public class QuestionController {
 	
 	@Resource
 	private QuestionService questionService;
+	
+	@Autowired
+	private Member_Service service;
 
 	/**
 	 * 공지사항 리스트 화면으로 이동
@@ -41,7 +46,8 @@ public class QuestionController {
 	public ModelAndView showJoincpa() {
 		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/question_list.jsp");
 		
-		List<QuestionDTO> questionList = questionService.selectQuestionList();
+		List<QuestionDTO> questionList = questionService.selectQuestionList();//QuestionDTO 받아오기
+		
 		
 		// JSONObject jObject = new JSONObject();
 	    JSONArray jArray = new JSONArray();
@@ -139,7 +145,7 @@ public class QuestionController {
       mv.addObject("questionListJson", jArray);
       return mv;
    }
-	
+   
 	/*@RequestMapping(value = "/joincpa.do", method = RequestMethod.POST)
 	public String showjoincpa(MemberDTO member) {
 
@@ -151,6 +157,52 @@ public class QuestionController {
 
 		return "login.jsp";
 	}*/
-
-
+/*======================================EA================================*/
+   /**
+	 * EA질의서 관리 게시판 화면으로 이동
+	 * @return
+	 */
+	@RequestMapping(value = "eaList.do")
+	public String moveEaList() {
+		 return "/WEB-INF/views/question/ea_list.jsp"; 
+	}
+	
+	/**
+	* EA질의서 관리 게시판->디테일 페이지 이동
+    * @return
+    */
+//   @RequestMapping(value = "eaListDetail.do")
+//   public ModelAndView selectEaDetail(String version_id) {
+//      ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
+//      
+//      List<QuestionDTO> questionList = questionService.selectQuestionListById(Integer.parseInt(version_id));
+//      
+//      mv.addObject("version_title", questionList.get(0).getVersion_title());
+//      
+//       JSONArray jArray = new JSONArray();
+//       for (QuestionDTO questionDTO : questionList)
+//       {
+//            JSONObject questionJSON = new JSONObject();
+//            questionJSON.put("version_id", questionDTO.getVersion_id());
+//            questionJSON.put("version_title", questionDTO.getVersion_title());
+//            // q_number 사이사이에 .추가
+//            String q_number = questionDTO.getQ_number();
+//            StringBuffer sb = new StringBuffer(q_number);
+//            for (int i = 1; i < (q_number.length() * 2) - 2; i+=2) {
+//               sb.insert(i, ".");
+//            }
+//            questionJSON.put("q_number", sb.toString());
+//            questionJSON.put("content", questionDTO.getContent());
+//            jArray.add(questionJSON);
+//       }
+//       System.out.println(jArray.toString());
+//      mv.addObject("questionListJson", jArray);
+//      return mv;
+//   }
+   /*======================================Veteran================================*/
+	@RequestMapping(value = "veteranList.do")
+	public String moveVeteranList() {
+		 return "/WEB-INF/views/question/veteran_list.jsp"; 
+	}
+	
 }
