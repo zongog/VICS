@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Kang
 Build-Jdk: 1.8.0_144
+=======
+Built-By: KBK
+Build-Jdk: 1.8.0_151
+>>>>>>> 1f549130fee0b8192251559c4bd53f9bf4ac6aa0
 Created-By: Maven Integration for Eclipse
 

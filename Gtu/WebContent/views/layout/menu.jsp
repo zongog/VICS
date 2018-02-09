@@ -29,12 +29,13 @@
 		<ul class="nav nav-pills">
 		  <li role="presentation"><a href="${pageContext.request.contextPath}/noticAll.do">공지사항</a></li>
 		  <%-- <c:if test="${id eq 'cpa'}"> --%>
-		  <li role="presentation"><a href="${pageContext.request.contextPath}/questionList.do">질의서 관리</a></li>
+		  <li role="presentation"><a href="${pageContext.request.contextPath}/questionList.do">CPA질의서 관리</a></li>
 		  <%-- </c:if> --%>
 		  
 		  <%-- <c:if test="${id eq 'ea'}"> --%>
-		  <li role="presentation"><a href="${pageContext.request.contextPath}/eaList.do">질의서 관리</a></li>
+		  <li role="presentation"><a href="${pageContext.request.contextPath}/eaList.do">EA질의서 관리</a></li>
 		  <%-- </c:if> --%>
+		   <li role="presentation"><a href="${pageContext.request.contextPath}/veteranList.do">Veteran질의서 관리</a></li>
 		  
 		  <li role="presentation"><a href="findAllQnA.do">QnA 게시판</a></li>
 		  <li role="presentation"><a href="#">회원 관리</a></li>
