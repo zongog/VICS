@@ -82,4 +82,3 @@ qna_id int
 
 
 commit;
-commit;
