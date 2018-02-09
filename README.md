@@ -1,2 +1,2 @@
 # VICS
-ignore »Æ¿Œ
+ignore dddddd
