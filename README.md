@@ -1,1 +1,2 @@
 # VICS
+ignore »Æ¿Œ
