@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="question">
+
+	<select id="selectQuestionList" resultType="questionDTO">
+		SELECT VERSION_ID, VERSION_TITLE
+		FROM QUESTIONNAIRE_TB
+		GROUP BY VERSION_ID, VERSION_TITLE
+        ORDER BY VERSION_ID
+	</select>
+
+	<select id="selectRecentlyVersionId" resultType="string">
+		SELECT VERSION_ID
+		FROM (SELECT VERSION_ID 
+		      FROM QUESTIONNAIRE_TB
+		      ORDER BY VERSION_ID DESC)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<insert id="createQuestion">
+		INSERT INTO QUESTIONNAIRE_TB(VERSION_ID, VERSION_TITLE, Q_NUMBER, CONTENT)
+		VALUES(#{version_id}, #{version_title}, #{q_number}, #{content})
+	</insert>
+
+	<select id="selectQuestionListById" parameterType="int" resultType="questionDTO">
+		SELECT VERSION_ID, VERSION_TITLE, Q_NUMBER, CONTENT
+		FROM QUESTIONNAIRE_TB
+		WHERE VERSION_ID = #{version_id}
+	</select>
+</mapper>

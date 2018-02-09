@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="store.mapper.MemberMapper">
+
+	<insert id="create" parameterType="Member">
+		<if test="role == 'EA'">
+			Insert into
+			ea_tb(serial_number,mail,id,pw,name,role,permission,attachment)
+			Values(#{serial_number},#{mail},#{id},#{pw},#{name},#{role},0,0)
+		</if>
+		<if test="role == 'CPA'">
+			Insert into
+			cpa_tb(serial_number,mail,id,pw,name,role,permission,attachment)
+			Values(#{serial_number},#{mail},#{id},#{pw},#{name},#{role},0,0)
+		</if>
+		<if test="role == 'Veteran'">
+			Insert into
+			VETERAN_tb(serial_number,mail,id,pw,name,role,permission,attachment)
+			Values(#{serial_number},#{mail},#{id},#{pw},#{name},#{role},0,0)
+		</if>
+	</insert>
+
+
+
+
+	<select id="login" resultType="Member" parameterType="String">
+		<if test="role == 'EA'">
+			SELECT
+			serial_number, mail, id, pw, name, role, permission,
+			attachment
+			FROM
+			ea_tb
+			WHERE id = #{id} and pw = #{pw}
+		</if>
+		<if test="role == 'CPA'">
+			SELECT
+			serial_number, mail, id, pw, name, role, permission,
+			attachment
+			FROM
+			cpa_tb
+			WHERE id = #{id} and pw = #{pw}
+		</if>
+		<if test="role == 'Veteran'">
+			SELECT serial_number, mail, id, pw, name, role,
+			permission, attachment
+			FROM veteran_tb
+			WHERE id = #{id} and pw = #{pw}
+		</if>
+	</select>
+
+
+
+
+	<select id="cparead" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		cpa_tb
+		WHERE id = #{id}
+	</select>
+	<select id="earead" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		ea_tb
+		WHERE id = #{id}
+	</select>
+	<select id="veteranread" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		veteran_tb
+		WHERE id = #{id}
+	</select>
+
+
+
+
+	<select id="findincpa" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		cpa_tb
+		WHERE name = #{username} and mail = #{usermail}
+	</select>
+
+	<select id="findinea" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		ea_tb
+		WHERE name = #{username} and mail = #{usermail}
+	</select>
+	<select id="findinveteran" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		veteran_tb
+		WHERE name = #{username} and mail = #{usermail}
+	</select>
+
+
+
+
+	<select id="findpwincpa" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		cpa_tb
+		WHERE id=#{userid} and name = #{username} and mail =
+		#{usermail}
+	</select>
+
+	<select id="findpwinea" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		ea_tb
+		WHERE id=#{userid} and name = #{username} and mail =
+		#{usermail}
+	</select>
+	<select id="findpwinveteran" resultType="Member" parameterType="String">
+		SELECT
+		serial_number, mail, id, pw, name, role, permission, attachment
+		FROM
+		veteran_tb
+		WHERE id=#{userid} and name = #{username} and mail =
+		#{usermail}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
