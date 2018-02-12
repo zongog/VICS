@@ -16,7 +16,6 @@
      -->
 	<%@ include file="/WEB-INF/views/layout/common.jsp"%>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/question/adminpage.js"></script>
-    <link href="${pageContext.request.contextPath}/resources/SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css">
     
     <SCRIPT>
 	function change(style) {
@@ -86,12 +85,11 @@ nav li a:before {
     background: #5bc0de;
 }
 </style>
-    
+	<h2 style="text-align: center">Veteran 질의서 생성(Admin용)</h2>
 </head>
 <!-- body style="padding: 20px" -->
 <body> 
 <%@ include file="/views/layout/menu.jsp"%>
-	
 	
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -124,16 +122,15 @@ nav li a:before {
         </div>
     </div>
 </div>
-<h2 style="text-align: center">Veteran 질의서 생성(Admin용)</h2>
-<div><p>질의서 제목 : </p> <input type="text" id="version_title" name="version_title" class="form-control" style="margin-left:30px; width: 500px"></div><br>
-<div>
+	<body style="padding:50px">
+	<div><p>질의서 제목 : </p> <input type="text" id="version_title" name="version_title" class="form-control" style="margin-left:30px; width: 500px">
+	</div><br>
     <button id="createQuestion" onclick="createQuestion()" style="width: 150px; height:70px; font-family: HY나무B; font-size: 1em; background-color: #8cd0d3; margin-right: 20px">대질문 생성</button>
     <button id="saveQuestions" onclick="saveQuestions()" style="width: 150px; height:70px; font-family: HY나무B; font-size: 1em; background-color: #e0ffcc; margin-right: 20px">저장</button>
     <button id="EAPage" onclick="showIndex()" style="width: 150px; height:70px; font-family: HY나무B;font-size: 1em; background-color: #d3bec8;margin-right: 20px">EA 페이지로 이동</button>
     <button id="help" class="btn btn-primary" data-toggle="modal" data-target="#myModal"  style="width: 150px; height:70px; font-family: HY나무B;font-size: 1em;">Admin 가이드</button>
     <br /> <br />
     <div id="admin" style="width : 1500px; height : 700px; font-family: HY나무B"></div>
-</div>
 
 </body>
 </html>

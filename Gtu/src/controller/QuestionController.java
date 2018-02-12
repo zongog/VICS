@@ -64,6 +64,26 @@ public class QuestionController {
 		return mv;
 	}
 	
+	//EA_list에 DB에 있는 질의서 답변항목들을 출력
+	/*@RequestMapping(value = "getEAList.do")
+	public ModelAndView showEAList() {
+		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/question_list.jsp");
+		
+		List<QuestionDTO> questionList = questionService.selectQuestionList();//QuestionDTO 받아오기
+		
+	    JSONArray jArray = new JSONArray();
+	    for (QuestionDTO questionDTO : questionList)
+	    {
+	         JSONObject questionJSON = new JSONObject();
+	         questionJSON.put("version_id", questionDTO.getVersion_id());
+	         questionJSON.put("version_title", questionDTO.getVersion_title());
+	         jArray.add(questionJSON);
+	    }
+	    // jObject.put("StudentList", jArray);
+		mv.addObject("EAListJson", jArray);
+		return mv;
+	}*/
+	
 	/**
 	 * Admin 질의서 작성 화면으로 이동
 	 * @return
@@ -181,12 +201,11 @@ public class QuestionController {
 		}
 
 
-	   @RequestMapping(value = "getReport.do")
+	   @RequestMapping(value = "getReport.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	   public String getReport(String title) {
 	      // ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
 	      List<QuestionDTO> questionList = questionService.selectQuestionListByTitle(title);
-	      
 	      JSONArray jArray = new JSONArray();
 	      for (QuestionDTO questionDTO : questionList)
 	      {
@@ -199,13 +218,14 @@ public class QuestionController {
 	           for (int i = 1; i < (q_number.length() * 2) - 2; i+=2) {
 	              sb.insert(i, ".");
 	           }
-	           questionJSON.put("q_number", sb.toString());
+	           
 	           questionJSON.put("content", questionDTO.getContent());
+	           questionJSON.put("q_number", sb.toString());
 	           jArray.add(questionJSON);
 	      }
 //	      System.out.println(jArray.toString());
 	      String a = jArray.toJSONString();
-	      System.out.println("아아아아아아ㅏㅇ아아" + a);
+	      System.out.println(a);
 	      return a;
 	   }
 		

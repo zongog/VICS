@@ -69,14 +69,15 @@
 		
 </script>
 </head>
-<body>
+<body style="padding:50px">
 <%@ include file="/views/layout/menu.jsp"%>
 	<div>
 		<h1 align="left">EA질의서 관리 게시판</h1>
 	</div>
 	<div id="SBGridArea" align="center" style="width : 900px; height : 300px"></div>
-	
-	<button onclick="location.href='${pageContext.request.contextPath}/ea.detail'">등록하기</button></a>
+	<br>
+	<button onclick="location.href='${pageContext.request.contextPath}/ea.detail'" style="width: 150px; height:70px; font-family: HY나무B; font-size: 1em; background-color: #e0ffcc; margin-right: 20px">등록하기</button>
+	<br>
 </body>
 
 </html>
