@@ -18,7 +18,9 @@
 			        contentType: "application/json; charset=UTF-8",
 			        success: function(response){
 			            //데이터
+			           console.log("확인");
 			           console.log(response);
+			           console.log("확인");
 			           JSON.parse(response);
 			        },
 			        error:function (request,error) {

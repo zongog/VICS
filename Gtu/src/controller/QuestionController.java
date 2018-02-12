@@ -205,7 +205,7 @@ public class QuestionController {
 	      }
 //	      System.out.println(jArray.toString());
 	      String a = jArray.toJSONString();
-	      System.out.println(a);
+	      System.out.println("아아아아아아ㅏㅇ아아" + a);
 	      return a;
 	   }
 		
