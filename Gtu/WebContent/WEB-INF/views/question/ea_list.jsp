@@ -56,6 +56,7 @@
 		
 		// 새로만들기 버튼 클릭 시 화면 이동
 		function createQuestionPage(){
+	
 			location.href="${pageContext.request.contextPath}/eaDetail.do";
 		}
 		
@@ -66,7 +67,6 @@
 			location.href="${pageContext.request.contextPath}/selectQuestionDetail.do?version_id="+datagrid.getCellData(datagrid.getMouseRow(), 0);
 		}
 		
-		
 </script>
 </head>
 <body>
@@ -75,7 +75,8 @@
 		<h1 align="left">EA질의서 관리 게시판</h1>
 	</div>
 	<div id="SBGridArea" align="center" style="width : 900px; height : 300px"></div>
-	<a href="#"><button>등록</button></a>
+	
+	<button onclick="location.href='${pageContext.request.contextPath}/ea.detail'">등록하기</button></a>
 </body>
 
 </html>

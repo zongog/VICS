@@ -179,11 +179,11 @@ nav li a:before {
 										<input size="50" type="text" name="title" placeholder="번호로 입력하세요"> <input
 											class="btn btn-xs btn-default" type="submit" value="검색">
 									</form>
-				</div>
-						</div><Br><br><Br>
+								</div>
+							</div><Br><br><Br>
 					<div id="SBGridArea" align="center"></div>
-			</div>
-		</div>
+				</div>
+	</div>
 		<a href="noticewrite.jsp"><button>글작성</button></a>
 
 </body>

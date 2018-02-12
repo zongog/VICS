@@ -7,8 +7,26 @@
 <head>
     <meta charset="UTF-8">
 	<%@ include file="/WEB-INF/views/layout/common.jsp"%>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/question/ea_detail.js"></script>
     <link href="${pageContext.request.contextPath}/resources/SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+		function selectReport(version_title){
+			console.log(version_title);
+				$.ajax({
+			        url : "getReport.do?title="+version_title,
+			        type: "GET",
+			        // dataType: "string",
+			        contentType: "application/json; charset=UTF-8",
+			        success: function(response){
+			            //데이터
+			           console.log(response);
+			           JSON.parse(response);
+			        },
+			        error:function (request,error) {
+			           alert('\n[실패]\ncode:'+request.status+'\n'+'error:'+error);
+			        }
+			    });
+		}
+	</script>
 </head>
 <body style="padding: 20px">
 	<%@ include file="/views/layout/menu.jsp"%>
@@ -19,14 +37,27 @@
     <table class="table">
 			<tr>
 				<th>질의서를 선택하세요.</th>
-				<td><select Name="version_title"></select></td>
+				<td>
+					<select Name="version_title" onChange="selectReport(this.options[this.selectedIndex].value)">
+					<option>선택</option>
+						<c:forEach var="tuple" items="${questionList}"  varStatus="status">
+						<option value="${tuple.version_title}">${tuple.version_title}</option>
+						</c:forEach>
+					</select>
+				</td>
 			</tr>
 			<tr>
-				<th>베테랑을 선택하세요.</th>
-				<td><input id="password" name="password" class="form-control" type="password" value="" placeholder="비밀번호를 입력해주세요."></td>
+				<th>을 입력해 주세요</th>
+				<td>
+					<input type="text">
+				</td>
+				<th>베테랑 이름을 입력해 주세요</th>
+				<td>
+					<input type="text">
+				</td>
 			</tr>
 		</table>
-    
+   <div>출력 확인</div>
     <div id="EA" style="width : 720px; height : 700px" ></div>
     <div>
         <button id="save" onclick="saveAll()">저장하기</button>

@@ -14,4 +14,6 @@ public interface QuestionDAO {
 	String selectRecentlyVersionId();
 
 	List<QuestionDTO> selectQuestionListById(int version_id);
+
+	List<QuestionDTO> selectQuestionListByTitle(String title);
 }

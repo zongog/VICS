@@ -41,5 +41,10 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDao.selectQuestionListById(version_id);
 	}
 
+	@Override
+	public List<QuestionDTO> selectQuestionListByTitle(String title) {
+		return questionDao.selectQuestionListByTitle(title);
+	}
+
 	
 }

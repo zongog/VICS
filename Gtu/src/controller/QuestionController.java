@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Member;
 import domain.QuestionDTO;
 import service.Member_Service;
 import service.QuestionService;
@@ -27,7 +28,7 @@ public class QuestionController {
 	private QuestionService questionService;
 	
 	@Autowired
-	private Member_Service service;
+	private Member_Service memberService;
 
 	/**
 	 * 공지사항 리스트 화면으로 이동
@@ -167,6 +168,48 @@ public class QuestionController {
 		 return "/WEB-INF/views/question/ea_list.jsp"; 
 	}
 	
+	  /**
+		 * EA질의서 관리 게시판 화면으로 이동
+		 * @return
+		 */
+		@RequestMapping(value = "ea.detail")
+		public ModelAndView movetest() {
+			ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
+			List<QuestionDTO> questionList = questionService.selectQuestionList();
+			mv.addObject("questionList", questionList);
+			return mv; 
+		}
+
+
+	   @RequestMapping(value = "getReport.do")
+	@ResponseBody
+	   public String getReport(String title) {
+	      // ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
+	      List<QuestionDTO> questionList = questionService.selectQuestionListByTitle(title);
+	      
+	      JSONArray jArray = new JSONArray();
+	      for (QuestionDTO questionDTO : questionList)
+	      {
+	           JSONObject questionJSON = new JSONObject();
+	           questionJSON.put("version_id", questionDTO.getVersion_id());
+	           questionJSON.put("version_title", questionDTO.getVersion_title());
+	           // q_number 사이사이에 .추가
+	           String q_number = questionDTO.getQ_number();
+	           StringBuffer sb = new StringBuffer(q_number);
+	           for (int i = 1; i < (q_number.length() * 2) - 2; i+=2) {
+	              sb.insert(i, ".");
+	           }
+	           questionJSON.put("q_number", sb.toString());
+	           questionJSON.put("content", questionDTO.getContent());
+	           jArray.add(questionJSON);
+	      }
+//	      System.out.println(jArray.toString());
+	      String a = jArray.toJSONString();
+	      System.out.println(a);
+	      return a;
+	   }
+		
+		
 	/**
 	* EA질의서 관리 게시판->디테일 페이지 이동
     * @return
@@ -199,6 +242,7 @@ public class QuestionController {
 //      mv.addObject("questionListJson", jArray);
 //      return mv;
 //   }
+   
    /*======================================Veteran================================*/
 	@RequestMapping(value = "veteranList.do")
 	public String moveVeteranList() {
