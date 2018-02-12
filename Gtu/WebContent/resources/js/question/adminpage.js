@@ -43,6 +43,7 @@ $(document).ready(function(){
 
 //[저장]
 function saveQuestions() {
+	console.log('sddf');
 	console.log('version_title is ',$('#version_title').val());
 	if($('#version_title').val()===undefined){
 		alert('제목을 입력해 주세요');

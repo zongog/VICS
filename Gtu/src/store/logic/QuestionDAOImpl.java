@@ -41,4 +41,10 @@ public class QuestionDAOImpl implements QuestionDAO{
 		return template.selectList("question.selectQuestionListById", version_id);
 	}
 
+	@Override
+	public List<QuestionDTO> selectQuestionListByTitle(String title) {
+		// TODO Auto-generated method stub
+		return template.selectList("question.selectQuestionListByTitle",  title);
+	}
+
 }

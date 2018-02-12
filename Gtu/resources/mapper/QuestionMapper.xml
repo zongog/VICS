@@ -30,4 +30,10 @@
 		FROM QUESTIONNAIRE_TB
 		WHERE VERSION_ID = #{version_id}
 	</select>
+	
+	<select id="selectQuestionListByTitle" parameterType="string" resultType="questionDTO">
+		SELECT VERSION_ID, VERSION_TITLE, Q_NUMBER, CONTENT
+		FROM QUESTIONNAIRE_TB
+		WHERE VERSION_TITLE = #{title}
+	</select>
 </mapper>
