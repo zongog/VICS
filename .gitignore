@@ -1,7 +1,7 @@
 README.md
 /Gtu/target
-*.classpath
-*.project
+Gtu/*.classpath
+Gtu/*.project
 
 
 
