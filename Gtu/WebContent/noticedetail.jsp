@@ -22,6 +22,16 @@
 	<script src="resources/SBGrid/SBGrid_Lib.js" type="text/javascript"></script> 
 	<script src="resources/SBGrid/SBGrid_min.js" type="text/javascript"></script> 
 	
+<script type="text/javascript">
+function button_event(){
+if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    document.form.submit();
+}else{   //취소
+    return false;
+}
+}
+</script>
+
 
 <SCRIPT>
 	function change(style) {
@@ -120,7 +130,7 @@ nav li a:before {
                          &nbsp;<span class="text-muted">${notice.hits }</span>
 
                          <a href="findNoticeByid.do?id=${notice.id }" class="glyphicon glyphicon-cog pull-right" style="padding:10px">수정</a>
-                         <a href="deletenotice.do?id=${notice.id }" class="glyphicon glyphicon-trash pull-right" style="padding:10px">삭제</a>
+                         <a href="deletenotice.do?id=${notice.id }" onclick="button_event();" class="glyphicon glyphicon-trash pull-right" style="padding:10px">삭제</a></button>
                     </div>
                     <br>
                     <p style="padding:20px"> ${notice.content } </p>

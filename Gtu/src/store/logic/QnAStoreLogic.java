@@ -72,4 +72,65 @@ public class QnAStoreLogic implements QnAStore{
 		}
 	}
 
+	@Override
+	public List<QnA> findbytitle(String title) {
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		List<QnA> list = null;
+		
+		try {
+			QnAMapper mapper = session.getMapper(QnAMapper.class);
+			list = mapper.findbytitle(title);
+		}finally {
+			session.close();
+		}
+		return list;
+	}
+
+	@Override
+	public List<QnA> findbyconetent(String content) {
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		List<QnA> list = null;
+		
+		try {
+			QnAMapper mapper = session.getMapper(QnAMapper.class);
+			list = mapper.findbyconetent(content);
+		}finally {
+			session.close();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<QnA> findbymember(String member) {
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		List<QnA> list = null;
+		
+		try {
+			QnAMapper mapper = session.getMapper(QnAMapper.class);
+			list = mapper.findbymember(member);
+		}finally {
+			session.close();
+		}
+		return list;
+	}
+
+	@Override
+	public void delete(int id) {
+		
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		
+		try {
+			QnAMapper mapper = session.getMapper(QnAMapper.class);
+			mapper.delete(id);
+			session.commit();
+		}finally {
+			session.close();
+		}
+	}
+
 }

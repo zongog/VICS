@@ -11,4 +11,7 @@ public interface NoticeService {
 	Notice searchById(int id);
 	void removeNotice(int id);
 	void modifyNotice(Notice notice);
+	
+	List<Notice> searchBytitle(String title);
+	List<Notice> searchBycontent(String content);
 }

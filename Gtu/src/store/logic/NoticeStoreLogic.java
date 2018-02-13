@@ -86,4 +86,35 @@ public class NoticeStoreLogic implements NoticeStore{
 		}
 		
 	}
+
+	@Override
+	public List<Notice> findbytitle(String title) {
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		List<Notice> list = null;
+		
+		try {
+			NoticeMapper mapper = session.getMapper(NoticeMapper.class);
+			list = mapper.findbytitle(title);
+			
+		}finally {
+			session.close();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Notice> findbycontent(String content) {
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		List<Notice> list = null;
+		
+		try {
+			NoticeMapper mapper = session.getMapper(NoticeMapper.class);
+			list = mapper.findbycontent(content);
+		}finally {
+			session.close();
+		}
+		return list;
+	}
 }

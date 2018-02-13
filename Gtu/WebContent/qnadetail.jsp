@@ -24,6 +24,16 @@
 <!-- SBGrid 제품 설정 -->
 <script src="resources/SBGrid/SBGrid_Lib.js" type="text/javascript"></script>
 <script src="resources/SBGrid/SBGrid_min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function button_event(){
+if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+    document.form.submit();
+}else{   //취소
+    return false;
+}
+}
+</script>
+
 <style type="text/css">
 .col-lg-12 {
 	margin: 0;
@@ -103,18 +113,18 @@ nav li a:before {
 
 			<div class="col-sm-9 col-lg-9">
 				<div>
-					<h3>공지사항</h3>
+					<h3>QnA</h3>
 				</div>
 
 				<div class="panel panel-default containers">
 					<div class="panel-heading">글제목 : ${qna.title }</div>
 					<div class="panel-body">
 						<div class="post">
-							<strong>저자명 : 관리자</strong> &nbsp;<span class="text-muted">${qna.qnadate }</span>
+							<strong>작성자 : ${qna.member }</strong> &nbsp;<span class="text-muted">${qna.qnadate }</span>
 
 							<a href="findNoticeByid.do?id=${qna.qna_id }"
 								class="glyphicon glyphicon-cog pull-right" style="padding: 10px">수정</a>
-							<a href="deletenotice.do?id=${qna.qna_id }"
+							<a href="deleteQnA.do?id=${qna.qna_id }" onclick="button_event();"
 								class="glyphicon glyphicon-trash pull-right"
 								style="padding: 10px">삭제</a>
 						</div>
@@ -127,14 +137,14 @@ nav li a:before {
 						<tr>
 							<td><strong>${comment.member }</strong></td>
 							<td class="text-right">${comment.answer_date }<a
-								class="glyphicon glyphicon-trash" href="#"></a>
+								class="glyphicon glyphicon-trash" href="deleteComment.do?answer_id=${comment.answer_id }&qna_id=${qna.qna_id}"></a>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<p class="txt">${comment.content }<br><br>
 								
-								<a href="#">댓글달기</a>
+								<button>댓글달기</button>
 								
 								</p>
 							</td>
@@ -146,7 +156,7 @@ nav li a:before {
 			<div class="write_area">
 				<form action="registanswer.do">
 					<input type="hidden" name="qna_id" value="${qna.qna_id }">
-					<input type="hidden" name="member" value="관리자">
+					<input type="hidden" name="member" value="${loginedUser.name }">					
 					<textarea class="input_write_comment" name="content"
 						placeholder="댓글쓰기"></textarea>
 					<input type="submit" class="comment_submit" value="전송">

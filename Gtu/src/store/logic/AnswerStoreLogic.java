@@ -59,6 +59,36 @@ public class AnswerStoreLogic implements AnswerStore{
 		}
 		
 	}
+
+	@Override
+	public void deleteAllComment(int qna_id) {
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		
+		try {
+			AnswerMapper mapper = session.getMapper(AnswerMapper.class);
+			mapper.deleteAllComment(qna_id);
+			session.commit();
+		}finally {
+			session.close();
+		}
+		
+	}
+
+	@Override
+	public void deleteComment(int answer_id) {
+		
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		
+		try {
+			AnswerMapper mapper = session.getMapper(AnswerMapper.class);
+			mapper.deleteComment(answer_id);
+			session.commit();
+		}finally {
+			session.close();
+		}
+		
+	}
 	
 	
 

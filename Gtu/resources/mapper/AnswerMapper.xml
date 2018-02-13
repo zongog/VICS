@@ -10,12 +10,19 @@
 			select answer_seq.nextval from dual
   </selectKey>
   insert into answer_tb(answer_id, content, member, answer_date, qna_id)
-  Values(#{answer_id}, #{content}, '관리자', SYSDATE, #{qna_id})
+  Values(#{answer_id}, #{content}, #{member}, SYSDATE, #{qna_id})
   </insert>
   
   <select id="findAllAnswer" resultType="comment" parameterType="int">
   select answer_id, content, member, answer_date, qna_id from answer_tb where qna_id = #{qna_id}
   </select>
+  
+  <delete id="deleteAllComment" parameterType="int">
+  delete from answer_tb where qna_id = #{qna_id}
+  </delete>
+  <delete id="deleteComment" parameterType="int">
+  delete from answer_tb where answer_id = #{answer_id}
+  </delete>
   
   	
 		

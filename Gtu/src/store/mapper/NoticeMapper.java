@@ -11,4 +11,6 @@ public interface NoticeMapper {
 	Notice findById(int id);
 	void deleteNotice(int id);
 	void updateNotice(Notice notice);
+	List<Notice> findbytitle(String title);
+	List<Notice> findbycontent(String content);
 }

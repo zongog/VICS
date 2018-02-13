@@ -51,10 +51,8 @@ public class NoticeController {
 	@RequestMapping("/noticedetail.do")
 	   public ModelAndView noticedetailView(int id) {
 		
-		System.out.println(id);
 		
 		Notice notice = noticeService.searchById(id);
-		
 		ModelAndView modelAndView = new ModelAndView("noticedetail.jsp");
 		modelAndView.addObject("notice", notice);
 		
@@ -72,7 +70,6 @@ public class NoticeController {
 	@RequestMapping("/modifynotice.do")
 	   public ModelAndView modifynotice(Notice notice, int id) {
 		
-		noticeService.modifyNotice(notice);
 		ModelAndView modelAndView = new ModelAndView("noticAll.do");
 		return modelAndView;
 	}
@@ -87,6 +84,47 @@ public class NoticeController {
 		return modelAndView;
 	}
 	
+	@RequestMapping("/findAllBytitle.do")
+	   public ModelAndView findAllBytitle(String title) {
+		
+			List<Notice> list = noticeService.searchBytitle(title);
+			ModelAndView modelAndView = new ModelAndView("main.jsp");
+			JSONArray jArray = new JSONArray();
+			
+		    for (Notice notice : list)
+		    {
+		         JSONObject questionJSON = new JSONObject();
+		         questionJSON.put("id", notice.getId());
+		         questionJSON.put("title", notice.getTitle());
+		         questionJSON.put("hits", notice.getHits());
+		         questionJSON.put("n_date", notice.getN_date());
+		         questionJSON.put("attachment", notice.getAttachment());
+		         jArray.add(questionJSON);
+		    }
+		    
+		    modelAndView.addObject("questionListJson", jArray);
+			return modelAndView;
+		}
 	
+	@RequestMapping("/findAllBycontent.do")
+	   public ModelAndView findAllBycontent(String content ) {
+			List<Notice> list = noticeService.searchBycontent(content);
+			ModelAndView modelAndView = new ModelAndView("main.jsp");
+			JSONArray jArray = new JSONArray();
+			
+		    for (Notice notice : list)
+		    {
+		         JSONObject questionJSON = new JSONObject();
+		         questionJSON.put("id", notice.getId());
+		         questionJSON.put("title", notice.getTitle());
+		         questionJSON.put("hits", notice.getHits());
+		         questionJSON.put("n_date", notice.getN_date());
+		         questionJSON.put("attachment", notice.getAttachment());
+		         jArray.add(questionJSON);
+		    }
+		    
+		    modelAndView.addObject("questionListJson", jArray);
+			return modelAndView;
+		}
 	
 }

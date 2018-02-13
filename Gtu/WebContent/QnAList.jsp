@@ -162,26 +162,23 @@ nav li a:before {
 									<option value="selectBox00">::: 검색조건 :::</option>
 									<option value="selectBox01">제목</option>
 									<option value="selectBox02">내용</option>
-									<option value="selectBox03">번호</option>
+									<option value="selectBox03">작성자</option>
 								</select>
 								<div id=view1 style="display: none;">
-									<form action="findBet.do">
-										<input type="hidden" name="betWay" value="${betWay }">
-										<input size="50" type="text" name="betId" placeholder="제목으로검색"> 
+									<form action="findAlltitle.do">
+										<input size="50" type="text" name="title" placeholder="제목으로검색">
 										<input class="btn btn-xs btn-default" type="submit" value="검색">
 									</form>
 								</div>
 								<div id=view2 style="display: none;">
-									<form action="findBet.do">
-									<input type="hidden" name="betWay" value="${betWay }"> 
-										<input size="50" type="text" name="betOwner" placeholder="내용으로 검색"> <input
+									<form action="findAllcontent.do">
+										<input size="50" type="text" name="content" placeholder="내용으로 검색"> <input
 											class="btn btn-xs btn-default" type="submit" value="검색">
 									</form>
 								</div>
 								<div id=view3 style="display: none;">
-									<form action="findBet.do">
-									<input type="hidden" name="betWay" value="${betWay }"> 
-										<input size="50" type="text" name="title" placeholder="번호로 입력하세요"> <input
+									<form action="findAllmember.do">
+										<input size="50" type="text" name="member" placeholder="작성자를 입력하세요"> <input
 											class="btn btn-xs btn-default" type="submit" value="검색">
 									</form>
 				</div>

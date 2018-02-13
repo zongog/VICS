@@ -83,8 +83,6 @@ nav li a:before {
 
 	<!-- Main Navigation ================================================================================= -->
 	<%@ include file="/views/layout/menu.jsp"%>
-
-
 	<!-- Container ======================================================================================= -->
 	<div class="containers">
 		<div class="col-sm-9 col-lg-9">
@@ -92,7 +90,7 @@ nav li a:before {
 				<h1 align="left">글 작성</h1>
 				<br><br>
 			</div>
-			<form name="form" action="registQnA.do" method="post">
+			<form action="registQnA.do" method="POST">
 				<table class="table">
 					<tr>
 						<th>제목</th>

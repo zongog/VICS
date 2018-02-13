@@ -56,8 +56,8 @@
 			// [필수] 그리드의 컬럼을 입력합니다.  
 			SBGridProperties.columns = [
 				{caption : ['번호'],		ref : 'id',		width : '80px',	  style : 'text-align:center',	type : 'output'},
-				{caption : ['제목'],		ref : 'title',width : '700px',  style : 'text-align:center',	type : 'output'},
-				{caption : ['등록일'],	ref : 'n_date',		width : '200px',	style : 'text-align:center',	type : 'datepicker', typeinfo : {locale : 'ko' , dateformat :'yymmdd'}, format : {type:'date', rule:'yyyy-mm-dd', origin : 'yyyymmdd' }},
+				{caption : ['제목'],		ref : 'title', width : '700px',  style : 'text-align:center',	type : 'output'},
+				{caption : ['등록일'],	ref : 'n_date',		width : '200px',	style : 'text-align:center', format : {type:'date', rule:'yyyy-mm-dd', origin : 'yyyymmdd' }},
 				{caption : ['조회수'],	ref : 'hits',  width : '130px',  style : 'text-align:center',	type : 'output'},
 				{caption : ['첨부파일'],	ref : 'attachment',width : '130px',  style : 'text-align:center',	type : 'output'},
 				
@@ -88,11 +88,6 @@
 			view1.style.display = "none"
 			view2.style.display = "inline"
 			view3.style.display = "none"
-		}
-		if (style == "selectBox03") {
-			view1.style.display = "none"
-			view2.style.display = "none"
-			view3.style.display = "inline"
 		}
 	}
 </SCRIPT>
@@ -157,34 +152,24 @@ nav li a:before {
 									<option value="selectBox00">::: 검색조건 :::</option>
 									<option value="selectBox01">제목</option>
 									<option value="selectBox02">내용</option>
-									<option value="selectBox03">번호</option>
 								</select>
 								<div id=view1 style="display: none;">
-									<form action="findBet.do">
-										<input type="hidden" name="betWay" value="${betWay }">
-										<input size="50" type="text" name="betId" placeholder="제목으로검색"> 
+									<form action="findAllBytitle.do">
+										<input size="50" type="text" name="title" placeholder="제목으로검색"> 
 										<input class="btn btn-xs btn-default" type="submit" value="검색">
 									</form>
 								</div>
 								<div id=view2 style="display: none;">
-									<form action="findBet.do">
-									<input type="hidden" name="betWay" value="${betWay }"> 
-										<input size="50" type="text" name="betOwner" placeholder="내용으로 검색"> <input
+									<form action="findAllBycontent.do">
+										<input size="50" type="text" name="content" placeholder="내용으로 검색"> <input
 											class="btn btn-xs btn-default" type="submit" value="검색">
 									</form>
 								</div>
-								<div id=view3 style="display: none;">
-									<form action="findBet.do">
-									<input type="hidden" name="betWay" value="${betWay }"> 
-										<input size="50" type="text" name="title" placeholder="번호로 입력하세요"> <input
-											class="btn btn-xs btn-default" type="submit" value="검색">
-									</form>
-				</div>
 						</div><Br><br><Br>
 					<div id="SBGridArea" align="center"></div>
 			</div>
 		</div>
-		<a href="noticewrite.jsp"><button>글작성</button></a>
+		<c:if test="${loginedUser.id eq 'admin'}"><a href="noticewrite.jsp"><button>글작성</button></a></c:if>
 
 </body>
 </html>

@@ -15,7 +15,7 @@
   </insert>
   
   <select id="findAll" resultType="Notice">
-  select id, title, content, hits, n_date, attachment from Notice_tb
+  select id, title, content, hits, n_date, attachment from Notice_tb ORDER BY id
   </select>  
   
   <select id="findById" resultType="Notice" parameterType="int">
@@ -33,4 +33,12 @@
   
   </update>
   
+  <select id="findbytitle" parameterType="String" resultType="Notice">
+  	select id, title, content, hits, n_date, attachment from Notice_tb where title like '%'||#{title}||'%'
+  </select>
+  
+  <select id="findbycontent" parameterType="String" resultType="Notice">
+  	select id, title, content, hits, n_date, attachment from Notice_tb where content like '%'||#{content}||'%'
+  </select>
+  	
   </mapper>

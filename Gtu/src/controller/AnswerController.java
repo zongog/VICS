@@ -2,6 +2,8 @@ package controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,20 +24,24 @@ public class AnswerController {
 	private QnAService qnaservice;
 	
 	@RequestMapping("/registanswer.do")//->안됨
-	   public ModelAndView registanswer(Comment comment, int qna_id) {
+	   public ModelAndView registanswer(Comment comment, int qna_id, String member) {
 		
+		
+		System.out.println(member);
 		answerservice.RegistAnswer(comment);
 		
-		if(comment.getMember().equals("관리자")) {
+		if(member.equals("관리자")) {
 			QnA qna = new QnA();
 			qna.setQna_id(qna_id);
 			qna.setConfirm("완료");
 			qnaservice.modify(qna);
 		}
 		
+		QnA qna = qnaservice.searchQnAByid(qna_id);
 		List<Comment> list = answerservice.searchAll(qna_id);
 		ModelAndView modelAndView = new ModelAndView("qnadetail.jsp");
 		modelAndView.addObject("list", list);
+		modelAndView.addObject("qna", qna);
 		return modelAndView;
 	}
 	
@@ -44,9 +50,19 @@ public class AnswerController {
 		
 		answerservice.RegistComment(answer);
 		List<Comment> list = answerservice.searchAll(qna_id);
+		ModelAndView modelAndView = new ModelAndView("findQnAbyid.do");
+		modelAndView.addObject("list", list);
+		return modelAndView;
+	}
+	
+	@RequestMapping("/deleteComment.do")
+	   public ModelAndView deleteComment(int answer_id, int qna_id) {
+		answerservice.removeAnswer(answer_id);
+		List<Comment> list = answerservice.searchAll(qna_id);
 		ModelAndView modelAndView = new ModelAndView("qnadetail.jsp");
 		modelAndView.addObject("list", list);
 		return modelAndView;
 	}
+	
 	
 }

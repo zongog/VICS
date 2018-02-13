@@ -43,4 +43,14 @@ public class AnswerServiceLogic implements AnswerService{
 		
 	}
 
+	@Override
+	public void removeAllAnswer(int qna_id) {
+		answerStore.deleteAllComment(qna_id);
+	}
+
+	@Override
+	public void removeAnswer(int answer_id) {
+		answerStore.deleteComment(answer_id);
+	}
+
 }

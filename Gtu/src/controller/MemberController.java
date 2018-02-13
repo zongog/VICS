@@ -95,7 +95,7 @@ public class MemberController {
 			return "login.jsp";
 		}
 
-		return "redirect:main";
+		return "noticAll.do";
 	}
 
 	@RequestMapping("/findbynamemail.do")

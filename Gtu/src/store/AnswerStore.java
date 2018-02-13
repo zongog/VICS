@@ -11,5 +11,7 @@ public interface AnswerStore {
 	List<Comment> findAllAnswer(int qna_id);
 	void createComment(Answer answer);
 	
+	void deleteAllComment(int qna_id);
+	void deleteComment(int answer_id);
 
 }

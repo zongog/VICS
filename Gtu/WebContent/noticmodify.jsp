@@ -94,6 +94,7 @@ nav li a:before {
 				<br><br>
 			</div>
 			<form name="form" action="modifynotice.do?id=${notice.id }" method="post">
+			<input type="hidden" name="hits" value="${notice.hits }">
 				<table class="table">
 					<tr>
 						<th>제목</th>
@@ -107,7 +108,7 @@ nav li a:before {
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td> <textarea class="form-control" name="content" rows="10" id="textArea" placeholder="내용을 입력해 주세요"></textarea></td>
+						<td> <textarea class="form-control" name="content" rows="10" id="textArea" placeholder="내용을 입력해 주세요">${notice.content }</textarea></td>
 					</tr>
 				</table>
 				<br>

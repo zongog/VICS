@@ -52,4 +52,14 @@ public class NoticeServiceLogic implements NoticeService{
 		noticeStore.updateNotice(notice);
 	}
 
+	@Override
+	public List<Notice> searchBytitle(String title) {
+		return noticeStore.findbytitle(title);
+	}
+
+	@Override
+	public List<Notice> searchBycontent(String content) {
+		return noticeStore.findbycontent(content);
+	}
+
 }

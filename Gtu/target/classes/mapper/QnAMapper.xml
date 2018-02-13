@@ -15,7 +15,7 @@
   	</insert>
   	
   	<select id="findAllQnA" resultType="QnA">
-  	select qna_id, title, content, qnadate, member, secret, attachment, confirm from QnA_tb
+  	select qna_id, title, content, qnadate, member, secret, attachment, confirm from QnA_tb ORDER BY qna_id
   	</select>
   	
   	<select id="findQnAByid" parameterType="int" resultType="QnA">
@@ -23,10 +23,21 @@
   	</select>
   	
   	<update id="update" parameterType="QnA">
-  	
-  	update QnA_tb set confirm = #{confirm} where qna_id = #{qna_id}
-  	
+  	update QnA_tb, title, content set confirm = #{confirm}, title = #{title}, content = #{content} where qna_id = #{qna_id}
   	</update>
+  	
+  	<select id="findbytitle" parameterType="String" resultType="QnA">
+  	select qna_id, title, content, qnadate, member, secret, attachment, confirm from QnA_tb where title like '%'||#{title}||'%'
+  	</select>
+	<select id="findbyconetent" parameterType="String" resultType="QnA">
+	select qna_id, title, content, qnadate, member, secret, attachment, confirm from QnA_tb where content like '%'||#{content}||'%'
+	</select>
+	<select id="findbymember" parameterType="String" resultType="QnA">
+	select qna_id, title, content, qnadate, member, secret, attachment, confirm from QnA_tb where member like '%'||#{member}||'%'
+	</select>
 	
-  
+	<delete id="delete" parameterType="QnA">
+	delete from QnA_tb where qna_id = #{qna_id}
+	</delete>
+	
   </mapper>
