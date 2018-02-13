@@ -12,6 +12,7 @@
 		<typeAlias type="domain.Comment" alias="Comment"/>
 		<typeAlias type="domain.Answer" alias="Answer"/>
 		<typeAlias type="domain.QuestionDTO" alias="questionDTO"/>
+		<typeAlias type="domain.QuestionAnswerDTO" alias="questionAnswerDTO"/>
 		
 	</typeAliases>
 	

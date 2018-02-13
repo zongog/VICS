@@ -1,5 +1,6 @@
 package store.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import domain.QuestionAnswerDTO;
 import domain.QuestionDTO;
 import store.QuestionDAO;
 
@@ -43,8 +45,12 @@ public class QuestionDAOImpl implements QuestionDAO{
 
 	@Override
 	public List<QuestionDTO> selectQuestionListByTitle(String title) {
-		// TODO Auto-generated method stub
 		return template.selectList("question.selectQuestionListByTitle",  title);
+	}
+
+	@Override
+	public List<HashMap<String, String>> selectQuestionAnswerList(String session_id) {
+		return template.selectList("question.selectQuestionAnswerList", session_id);
 	}
 
 }

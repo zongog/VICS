@@ -1,7 +1,9 @@
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
+import domain.QuestionAnswerDTO;
 import domain.QuestionDTO;
 
 public interface QuestionService {
@@ -11,4 +13,5 @@ public interface QuestionService {
 	String selectRecentlyVersionId();
 	List<QuestionDTO> selectQuestionListById(int version_id);
 	List<QuestionDTO> selectQuestionListByTitle(String title);
+	List<HashMap<String, String>> selectQuestionAnswerList(String session_id);
 }

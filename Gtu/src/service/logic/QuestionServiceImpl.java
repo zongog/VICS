@@ -1,11 +1,13 @@
 package service.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import domain.QuestionAnswerDTO;
 import domain.QuestionDTO;
 import service.QuestionService;
 import store.QuestionDAO;
@@ -44,6 +46,12 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	public List<QuestionDTO> selectQuestionListByTitle(String title) {
 		return questionDao.selectQuestionListByTitle(title);
+	}
+
+	@Override
+	public List<HashMap<String, String>> selectQuestionAnswerList(String session_id) {
+		// TODO Auto-generated method stub
+		return questionDao.selectQuestionAnswerList(session_id);
 	}
 
 	

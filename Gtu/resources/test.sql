@@ -74,10 +74,14 @@ Constraint QUESTIONNAIRE_TB_PK Primary Key(version_id, Q_NUMBER)
 );
 
 CREATE TABLE Questionnaire_Answer_tb(
-id NUMBER PRIMARY KEY,
+veteran_answer_id NUMBER,
 version_id NUMBER,
 Q_number VARCHAR2(100),
-answer_list VARCHAR2(10)
+binary_answer VARCHAR2(10),
+interviewee_vt_id VARCHAR2(100),
+interviewer_ea_id VARCHAR2(100),
+question_date VARCHAR2(100),
+Constraint Questionnaire_Answer_tb_PK Primary Key(veteran_answer_id)
 );
 
 CREATE TABLE Notice_tb(
@@ -102,8 +106,3 @@ CREATE SEQUENCE Questionnaire_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE Questionnaire_Answer_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE Notice_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE answer_seq START WITH 1 INCREMENT BY 1;
-
-
-
-
-commit;

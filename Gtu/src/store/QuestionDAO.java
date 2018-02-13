@@ -1,7 +1,9 @@
 package store;
 
+import java.util.HashMap;
 import java.util.List;
 
+import domain.QuestionAnswerDTO;
 import domain.QuestionDTO;
 
 public interface QuestionDAO {
@@ -16,4 +18,6 @@ public interface QuestionDAO {
 	List<QuestionDTO> selectQuestionListById(int version_id);
 
 	List<QuestionDTO> selectQuestionListByTitle(String title);
+
+	List<HashMap<String, String>> selectQuestionAnswerList(String session_id);
 }

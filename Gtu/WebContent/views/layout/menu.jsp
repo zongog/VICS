@@ -7,7 +7,7 @@
     <div class="container" style="margin-left: 0; margin-right: 0">
         <div class="navbar-header">
             <a class="navbar-brand" style="margin-left: 0px;" href="#">
-           	<img width=500 height="90" alt="VICS" src="resources/images/VICS.png"></a>
+           	<img width=250 height="100" alt="VICS" src="resources/images/VICS.png"></a>
         </div>
         	<p class="navbar-brands">${loginedUser.name}님 환영합니다.</p>
             <a class="navbar-brandss" href="${pageContext.request.contextPath}/logout.do"> [로그아웃]</a>

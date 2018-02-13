@@ -7,23 +7,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="/WEB-INF/views/layout/common.jsp"%>
 <title>Veteran질의서 관리</title>
-<!-- sbSubtotal Module -->
-<script type="text/javascript" src="./sbSubtotal_v2.5.js"></script>
 
 <script type="text/javascript">
 		/*현재 날짜*/
-		var dt = new Date();  
+/* 		var dt = new Date();  
 		var month = dt.getMonth()+1;  
 		var day = dt.getDate();  
 		var year = dt.getFullYear();			
-		
+		 */
 		var datagrid; 
 		var SBGridProperties;
-		var grid_data= {key1: ''};
+		var grid_data;
 		
 		$(document).ready(function(){
+			grid_data= ${answerdata};
+
 			__createElements();
-			
 		})	
 		
 		function __createElements (){
@@ -33,16 +32,17 @@
 			SBGridProperties.id		  			= 'datagrid';
 			SBGridProperties.jsonref  			= 'grid_data';
 			
-			
-			
 			SBGridProperties.extendlastcol = 'scroll';
 			SBGridProperties.selectmode='byrow';
+			SBGridProperties.emptyrecords = '데이터가 존재하지 않습니다.';
+			SBGridProperties.emptyrecordsfontstyle = "color:#004e3d; font-size:20px; font-weight bold;";
+			SBGridProperties.rowheader = 'seq';
 			
 			SBGridProperties.columns = [
-				{caption : ['번호'],		ref : '번호입니다.',		width : '80px',	  style : 'text-align:center',	type : 'output'},
-				{caption : ['질의서 개정 제목'],		ref : '질의서 개정제목입니다.',width : '600px',  style : 'text-align:center',	type : 'output'},
-				{caption : ['담당EA'],	ref : '베테랑입니다.',	width : '120px',	style : 'text-align:center',	type : 'output'},
-				{caption : ['등록일'],		ref : '등록일입니다.',		width : '200px',	style : 'text-align:center',	type : 'output'},
+				{caption : ['질의서 버전 번호'],		ref : 'VERSION_ID',		width : '120px',	  style : 'text-align:center',	type : 'output'},
+				{caption : ['질의서 버전 제목'],		ref : 'VERSION_TITLE',width : '400px',  style : 'text-align:center',	type : 'output'},
+				{caption : ['담당EA'],	ref : 'NAME',	width : '120px',	style : 'text-align:center',	type : 'output'},
+				{caption : ['등록일'],		ref : 'QUESTION_DATE',		width : '200px',	style : 'text-align:center',	type : 'output'}
 			];
 
 			datagrid = _SBGrid.create(SBGridProperties);
@@ -63,7 +63,9 @@
 		function questionDetailPage(){
 			if(datagrid.getMouseRow()==0)
 				return;
-			location.href="${pageContext.request.contextPath}/selectQuestionDetail.do?version_id="+datagrid.getCellData(datagrid.getMouseRow(), 0);
+	        if(datagrid.getCellData(datagrid.getMouseRow(), 1) == null)
+	       		return;
+			location.href="${pageContext.request.contextPath}/questionAnswerDetail.do?version_id="+datagrid.getCellData(datagrid.getMouseRow(), 1);
 		}
 		
 		
@@ -74,7 +76,7 @@
 	<div>
 		<h1 align="left">Veteran 질의서 게시판</h1>
 	</div>
-	<div id="SBGridArea" align="center" style="width : 900px; height : 300px"></div>
+	<div id="SBGridArea" align="center" style="width : 1200px; height : 300px"></div>
 	
 </body>
 

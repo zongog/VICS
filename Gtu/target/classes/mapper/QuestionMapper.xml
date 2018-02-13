@@ -36,4 +36,12 @@
 		FROM QUESTIONNAIRE_TB
 		WHERE VERSION_TITLE = #{title}
 	</select>
+	
+	<select id="selectQuestionAnswerList" parameterType="string" resultType="java.util.HashMap">
+		SELECT DISTINCT answer.version_id, answer.question_date, answer.name, question.version_title
+		FROM (SELECT QUESTIONNAIRE_ANSWER_TB.version_id, interviewee_vt_id, interviewer_ea_id, question_date, name
+		      FROM QUESTIONNAIRE_ANSWER_TB, EA_TB
+		      WHERE interviewee_vt_id='1111' AND EA_TB.SERIAL_NUMBER = '1111') answer, Questionnaire_tb question
+		WHERE answer.version_id = question.version_id
+	</select>
 </mapper>

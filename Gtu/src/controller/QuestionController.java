@@ -1,8 +1,11 @@
 package controller;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Member;
+import domain.QuestionAnswerDTO;
 import domain.QuestionDTO;
 import service.Member_Service;
 import service.QuestionService;
@@ -181,7 +185,7 @@ public class QuestionController {
 		}
 
 
-	   @RequestMapping(value = "getReport.do")
+	   @RequestMapping(value = "getReport.do", produces = "application/text; charset=utf8")
 	@ResponseBody
 	   public String getReport(String title) {
 	      // ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
@@ -205,7 +209,7 @@ public class QuestionController {
 	      }
 //	      System.out.println(jArray.toString());
 	      String a = jArray.toJSONString();
-	      System.out.println("아아아아아아ㅏㅇ아아" + a);
+	      System.out.println(a);
 	      return a;
 	   }
 		
@@ -245,8 +249,35 @@ public class QuestionController {
    
    /*======================================Veteran================================*/
 	@RequestMapping(value = "veteranList.do")
-	public String moveVeteranList() {
-		 return "/WEB-INF/views/question/veteran_list.jsp"; 
+	public ModelAndView moveVeteranList(HttpSession session) {
+		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/veteran_list.jsp");
+				
+		Member memberVO = (Member) session.getAttribute("loginedUser");
+		int session_id = memberVO.getSerial_number();
+		List<HashMap<String, String>> answerMapList = questionService.selectQuestionAnswerList(Integer.toString(session_id));
+		
+        JSONArray jArray = new JSONArray();
+        for (int i = 0; i < answerMapList.size(); i++) {
+        	HashMap<String, String> answerHashMap = answerMapList.get(i);
+            JSONObject answerJSON = new JSONObject();
+            answerJSON.putAll(answerHashMap);
+            jArray.add(answerJSON);
+		}
+        mv.addObject("answerdata", jArray);
+        
+		return mv;
+	}
+	
+	@RequestMapping(value = "questionAnswerDetail.do")
+	public ModelAndView questionAnswerDetail(String version_id, HttpSession session) {
+		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/veteran_detail.jsp");
+		
+		Member memberVO = (Member) session.getAttribute("loginedUser");
+		int session_id = memberVO.getSerial_number();
+		System.out.println(session_id);
+		System.out.println(version_id);
+		
+		return mv;
 	}
 	
 }

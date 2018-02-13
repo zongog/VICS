@@ -59,9 +59,10 @@
 		
 		   // 그리드 클릭 시 detail 페이지로 화면 이동
 	      function questionDetailPage(){
-	         if(datagrid.getMouseRow()==0)
+	         if(datagrid.getMouseRow() == 0)
 	            return;
-	         
+	         if(datagrid.getCellData(datagrid.getMouseRow(), 0) == null)
+	        	 return;
 	         location.href="${pageContext.request.contextPath}/selectQuestionDetail.do?version_id="+datagrid.getCellData(datagrid.getMouseRow(), 0);
 	      };
 		
