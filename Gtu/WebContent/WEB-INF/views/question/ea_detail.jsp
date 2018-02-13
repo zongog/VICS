@@ -9,25 +9,7 @@
 	<%@ include file="/WEB-INF/views/layout/common.jsp"%>
     <!-- <link href="${pageContext.request.contextPath}/resources/SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css"> -->
 	<script type="text/javascript">
-<<<<<<< HEAD
-		function selectReport(version_title){
-			console.log(version_title);
-				$.ajax({
-			        url : "getReport.do?title="+version_title,
-			        type: "GET",
-			        // dataType: "string",
-			        contentType: "application/json; charset=UTF-8",
-			        success: function(response){
-			            //데이터
-			           console.log(response);
-			           JSON.parse(response);
-			        },
-			        error:function (request,error) {
-			           alert('\n[실패]\ncode:'+request.status+'\n'+'error:'+error);
-			        }
-			    });
-=======
-	
+
 	var datagrid;
 	var SBGridProperties = {};
 	var data=[//대 질문(init 함수 후에)
@@ -315,7 +297,7 @@
 		if(EA === ''){
 			alert('EA 이름을 입력해 주세요');
 			return;
->>>>>>> aec4ad82724de74adf07f9bed042598324b66261
+
 		}
 		else if(VETERAN === ''){
 			alert('VETERAN 이름을 입력해 주세요');

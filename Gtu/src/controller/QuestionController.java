@@ -206,11 +206,7 @@ public class QuestionController {
 
 
 	   @RequestMapping(value = "getReport.do", produces = "application/text; charset=utf8")
-<<<<<<< HEAD
-	@ResponseBody
-=======
 	   @ResponseBody
->>>>>>> aec4ad82724de74adf07f9bed042598324b66261
 	   public String getReport(String title) {
 	      // ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
 	      List<QuestionDTO> questionList = questionService.selectQuestionListByTitle(title);
