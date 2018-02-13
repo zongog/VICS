@@ -137,7 +137,7 @@ nav li a:before {
 </style>
 
 </head>
-<body>
+<body style="padding:50px">
 	<!-- %@ include file="/WEB-INF/views/layout/header.jsp"%>-->
 		<!-- Main Navigation ================================================================================= -->
 	<%@ include file="/views/layout/menu.jsp"%>

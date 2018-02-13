@@ -10,5 +10,7 @@ public interface Member_Service {
 	Member login(Member member);
 	List<Member> search(String name, String mail);
 	List<Member> findpw(String id, String name, String mail);
+	List<Member> findall();
 	Member findbyid(String id);
+	boolean modify(Member member);
 }

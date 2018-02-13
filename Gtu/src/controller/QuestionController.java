@@ -68,6 +68,26 @@ public class QuestionController {
 		return mv;
 	}
 	
+	//EA_list에 DB에 있는 질의서 답변항목들을 출력
+	/*@RequestMapping(value = "getEAList.do")
+	public ModelAndView showEAList() {
+		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/question_list.jsp");
+		
+		List<QuestionDTO> questionList = questionService.selectQuestionList();//QuestionDTO 받아오기
+		
+	    JSONArray jArray = new JSONArray();
+	    for (QuestionDTO questionDTO : questionList)
+	    {
+	         JSONObject questionJSON = new JSONObject();
+	         questionJSON.put("version_id", questionDTO.getVersion_id());
+	         questionJSON.put("version_title", questionDTO.getVersion_title());
+	         jArray.add(questionJSON);
+	    }
+	    // jObject.put("StudentList", jArray);
+		mv.addObject("EAListJson", jArray);
+		return mv;
+	}*/
+	
 	/**
 	 * Admin 질의서 작성 화면으로 이동
 	 * @return
@@ -172,25 +192,28 @@ public class QuestionController {
 		 return "/WEB-INF/views/question/ea_list.jsp"; 
 	}
 	
-	  /**
-		 * EA질의서 관리 게시판 화면으로 이동
-		 * @return
-		 */
-		@RequestMapping(value = "ea.detail")
-		public ModelAndView movetest() {
-			ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
-			List<QuestionDTO> questionList = questionService.selectQuestionList();
-			mv.addObject("questionList", questionList);
-			return mv; 
-		}
+  /**
+	 * EA질의서 관리 게시판 화면으로 이동
+	 * @return
+	 */
+	@RequestMapping(value = "ea.detail")
+	public ModelAndView movetest() {
+		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
+		List<QuestionDTO> questionList = questionService.selectQuestionList();
+		mv.addObject("questionList", questionList);
+		return mv; 
+	}
 
 
 	   @RequestMapping(value = "getReport.do", produces = "application/text; charset=utf8")
+<<<<<<< HEAD
 	@ResponseBody
+=======
+	   @ResponseBody
+>>>>>>> aec4ad82724de74adf07f9bed042598324b66261
 	   public String getReport(String title) {
 	      // ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
 	      List<QuestionDTO> questionList = questionService.selectQuestionListByTitle(title);
-	      
 	      JSONArray jArray = new JSONArray();
 	      for (QuestionDTO questionDTO : questionList)
 	      {
@@ -203,8 +226,9 @@ public class QuestionController {
 	           for (int i = 1; i < (q_number.length() * 2) - 2; i+=2) {
 	              sb.insert(i, ".");
 	           }
-	           questionJSON.put("q_number", sb.toString());
+	           
 	           questionJSON.put("content", questionDTO.getContent());
+	           questionJSON.put("q_number", sb.toString());
 	           jArray.add(questionJSON);
 	      }
 //	      System.out.println(jArray.toString());
@@ -213,7 +237,44 @@ public class QuestionController {
 	      return a;
 	   }
 		
-		
+	   
+//	   
+//	   @RequestMapping(value = "saveEA.do" ,method = RequestMethod.POST,  produces = "application/text; charset=utf8")
+//	   @ResponseBody
+//		public void saveEa(@RequestBody String data) throws ParseException {
+//		   JSONParser parser = new JSONParser();
+//		   JSONObject jsonObj = (JSONObject) parser.parse(data);
+//		   JSONArray jsonArray = (JSONArray) parser.parse((String)jsonObj.get("main")); //main version.title 나눠서 받아옴
+//		   String version_title = (String) jsonObj.get("version_title");
+//		   String veteran_name = (String)jsonObj.get("veteran_name");
+//			
+//			// 가장 최근 version_id값 가져오기
+//			String version_id_s = questionService.selectRecentlyVersionId();
+//			System.out.println("saveEA_version_id_s: " + version_id_s);
+//			int version_id = 0;
+//			if(version_id_s == null)	// 값이 아예 없을 경우(첫 insert)
+//				version_id = 1;
+//			else 						// 값이 있을 경우 그 값의 +1
+//				version_id = Integer.parseInt(version_id_s) + 1;
+//			System.out.println("version_id: " + version_id);
+//			for (int i = 0; i < jsonArray.size(); i++) {
+//				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//				String q_number = (String) jsonObject.get("q_number");
+//				String content = (String) jsonObject.get("content");
+//				
+//				// .을 제거해준다
+//				q_number = q_number.replaceAll("\\.", "");
+//				
+//				// 새 QuestionDTO 객체를 만든다
+//				QuestionDTO questionDTO = new QuestionDTO();
+//				questionDTO.setContent(content);
+//				questionDTO.setQ_number(q_number);
+//				questionDTO.setVersion_title(version_title);
+//				questionDTO.setVersion_id(version_id);
+//				
+//				questionService.createQuestion(questionDTO);
+//			}
+//		}
 	/**
 	* EA질의서 관리 게시판->디테일 페이지 이동
     * @return

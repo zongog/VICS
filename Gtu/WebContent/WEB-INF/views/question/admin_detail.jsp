@@ -14,14 +14,16 @@
     <script src="./SBGrid/SBGrid_min.js" type="text/javascript"></script>
     <link href="./SBGrid/css/SBGrid.css" rel="stylesheet" type="text/css">
      -->
-    <link href="${pageContext.request.contextPath}/resources/SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css">
+    <!--  <link href="WebContent/SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css">-->
 	
 	<%@ include file="/WEB-INF/views/layout/common.jsp"%>
 	<script type="text/javascript">
 	var datagrid;
 	var SBGridProperties = {};
-	var count = 0;
 	var data= ${questionListJson};
+	//var count = 0;
+	var count = data[data.length-1].q_number[0];
+	//console.log('[ATTENTOIN]', data[data.length-1].q_number[0]);
 
 	$(document).ready(function(){
 	    SBGridProperties.parentid = 'admin';
@@ -29,7 +31,7 @@
 	    SBGridProperties.jsonref = data;
 	    SBGridProperties.emptyrecords = '데이터가 존재하지 않습니다.';//데이터가 없을 때
 	    SBGridProperties.rowheight = '35';// 데이터 측 높이
-	    SBGridProperties.rowheader = 'seq';//번호 헤더
+	    //SBGridProperties.rowheader = 'seq';//번호 헤더
 	    SBGridProperties.extendlastcol = 'scroll';//마지막 열 그리드 크기에 맞게 확장
 	    SBGridProperties.selectmode = 'byrow';//한 줄씩 선택
 	    SBGridProperties.columns = [
@@ -89,8 +91,8 @@
 	//[질문등록]
 	function yesQuestion() {
 	    var nRow = datagrid.getRow(); // 버튼을 눌렀을 때 해당 행의 index
-	    var questionNumCol = 1; //질문번호 : 1열
-	    var questionCol = 2; //질문항목 : 2열
+	    var questionNumCol = 0; //질문번호 : 1열
+	    var questionCol = 1; //질문항목 : 2열
 	    var num = datagrid.getCellData(nRow,questionNumCol);//질문번호(버튼을 눌렀을 때 특정 셀에 대한 정보를 가져옴)
 	    var data=//삽일할 행의 기본 데이터
 	        {q_number: '',content : '', key2 : 'YES', key3 : 'NO',key4 : '삭제',doc:'필요서류 기재'};
@@ -102,7 +104,7 @@
 	        datagrid.insertRow(datagrid.getRow(),'below',data);//바로 아래에 삽입
 	        datagrid.setCellData(nRow+1, questionNumCol,num+'.1');//질문 번호 수정
 	        datagrid.setCellData(nRow+1,questionCol,num+'번 질문에 대한 YES');//질문항목 수정
-	        datagrid.setCellData(nRow+1,6,num+'.1번 질문에 대한 서류를 입력해 주세요');
+	        datagrid.setCellData(nRow+1,5,num+'.1번 질문에 대한 서류를 입력해 주세요');
 	        datagrid.refresh(false);
 	    }
 
@@ -110,8 +112,8 @@
 	//[질문등록]
 	function noQuestion() {
 	    var nRow = datagrid.getRow(); // 버튼을 눌렀을 때 해당 행의 index
-	    var questionNumCol = 1; //질문번호 : 1열
-	    var questionCol = 2; //질문항목 : 2열
+	    var questionNumCol = 0; //질문번호 : 1열
+	    var questionCol = 1; //질문항목 : 2열
 	    var num = datagrid.getCellData(nRow,questionNumCol); //질문번호(버튼을 눌렀을 때 특정 셀에 대한 정보를 가져옴)
 	    var data= //삽일할 행의 기본 데이터
 	        {q_number:'',content : '', key2 : 'YES', key3 : 'NO',key4 : '삭제',doc:'필요서류 기재'};
@@ -120,7 +122,7 @@
 	        alert('해당 질문이 이미 존재합니다');
 	    }
 	    else{//.2 (noQuestion)이 삽입되어 있지 않다면
-	        if(datagrid.getCellData(nRow+1,1) === datagrid.getCellData(nRow,1)+'.1'){//NO
+	        if(datagrid.getCellData(nRow+1,0) === datagrid.getCellData(nRow,0)+'.1'){//NO
 	            // 다음 줄에 .1이 이미 있으면 즉, (Yes)가 이미 눌러져 있을 경우
 	            // NO는 YES 이후에 삽입되어야 함
 	            // YES의 모든 하위항목이 끝나는 (.1이 끝나는 곳) 바로 뒤에 삽입해야 함  ->점심 후에 ㄱㄱ
@@ -129,16 +131,16 @@
 	            datagrid.insertRow(insertPosition,'below',data); // 2줄 아래에 삽입
 	            datagrid.setCellData(insertPosition+1, questionNumCol,num+'.2');//질문번호 수정
 	            datagrid.setCellData(insertPosition+1,questionCol,num+'번 질문에 대한 NO');//질문항목 수정
-	            datagrid.setCellData(insertPosition+1,6,num+'.2번 질문에 대한 서류를 입력해 주세요');
+	            datagrid.setCellData(insertPosition+1,5,num+'.2번 질문에 대한 서류를 입력해 주세요');
 	            datagrid.refresh(false);
 	        }
 	        else{//OK
 	            // YES 에 대한 질문이 없다면 그냥 등록
-	            console.log('비교',datagrid.getCellData(nRow+1,1),datagrid.getCellData(nRow,1)+'.1');
+	            console.log('비교',datagrid.getCellData(nRow+1,0),datagrid.getCellData(nRow,0)+'.1');
 	            datagrid.insertRow(datagrid.getRow(),'below',data);//바로 아래에 삽입
 	            datagrid.setCellData(nRow+1, questionNumCol,num+'.2');//질문 번호 수정
 	            datagrid.setCellData(nRow+1,questionCol,num+'번 질문에 대한 NO');//질문항목 수정
-	            datagrid.setCellData(nRow+1,6,num+'.2번 질문에 대한 서류를 입력해 주세요');
+	            datagrid.setCellData(nRow+1,5,num+'.2번 질문에 대한 서류를 입력해 주세요');
 	            datagrid.refresh(false);
 	        }
 	    }
@@ -160,7 +162,7 @@
 	// 그리드 상에서 하위 번호가 아닐 때까지 찾는다. 하위 번호가 아니면 해당 행의 index 반환
 	function searchInsertPosition(startRow,questionNumber){
 	    for(var i=startRow; i<datagrid.getRows(); i++){
-	        if(insertCheck(questionNumber,datagrid.getCellData(i,1))){// 하위 번호이면 nothing
+	        if(insertCheck(questionNumber,datagrid.getCellData(i,0))){// 하위 번호이면 nothing
 
 	        }
 	        else return i;// 하위 번호가 아니면 return
@@ -172,7 +174,7 @@
 	// 이미 등록되어 있는 질문인지 확인 2018-01-31-11:46 AM
 	function isRegisteredQuestion(startRow,questionNumber){
 	    for(var i = startRow;i<datagrid.getRows();i++){
-	        if(datagrid.getCellData(i,1)=== questionNumber) return true;
+	        if(datagrid.getCellData(i,0)=== questionNumber) return true;
 	    }
 	    return false;
 	}
@@ -183,7 +185,7 @@
 	    var deleteCode = confirm("확인을 누르시면 하위 질문도 모두 삭제 됩니다.\n정말로 삭제 하시겠습니까?");
 	    if(deleteCode === true){
 	        var deleteNum = 1;
-	        var questionNumCol = 1; //질문번호 : 1열
+	        var questionNumCol = 0; //질문번호 : 1열
 	        var row = datagrid.getRow();
 	        var isDelete = false;
 	        var questionNumber = datagrid.getCellData(row,questionNumCol);//셀의 데이터 ex)1.1
@@ -227,79 +229,8 @@
 
 	
 	</script>
-	<SCRIPT>
-	function change(style) {
-
-		if (style == "selectBox01") {
-			view1.style.display = "inline"
-			view2.style.display = "none"
-			view3.style.display = "none"
-		}
-		if (style == "selectBox00") {
-			view1.style.display = "none"
-			view2.style.display = "none"
-			view3.style.display = "none"
-		}
-		if (style == "selectBox02") {
-			view1.style.display = "none"
-			view2.style.display = "inline"
-			view3.style.display = "none"
-		}
-		if (style == "selectBox03") {
-			view1.style.display = "none"
-			view2.style.display = "none"
-			view3.style.display = "inline"
-		}
-	}
-</SCRIPT>
-
-<style type="text/css">
-.col-lg-12{ margin:0; padding:0;}
-.containers{ margin:0; width:100%;}
-
-
-#nav { float: center; list-style: none; margin:0; padding:0; height: 100px; width:100%; background: #C5E0B4;  }
-#nav li { float: left; margin: 25px 0px 0px 5px; }
-#nav li a { color: #FFFFFF; display: block; font-size: 35px; padding: 5px 15px; }
-#nav li a:hover, #nav li.active a { background: green; color: #ffffff; text-decoration: none; }
-
-
-
-
-nav li {
-    position: relative;
-    border-bottom: 1px solid #d6d6d6;
-    
-}
-
-nav li a {
-    display: block;
-    padding: 15px 20px;
-    font-size: 13px;
-    font-weight: bold;
-    color: #363636;
-}
-
-nav li a:hover {
-    background: #f0f0f0;
-}
-
-nav li a:before {
-    content: '';
-    display: block;
-    width: 4px;
-    height: 44px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: #5bc0de;
-}
-</style>
+	<h2 style="text-align: center">Veteran 질의서 생성(Admin용)</h2>
 </head>
-<!-- <body style="padding: 20px">
-%@ include file="/WEB-INF/views/layout/header.jsp"%>-->
-<!-- %@ include file="/WEB-INF/views/layout/header.jsp"%>-->
-		<!-- Main Navigation ================================================================================= -->
 	<%@ include file="/views/layout/menu.jsp"%>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -333,7 +264,8 @@ nav li a:before {
         </div>
     </div>
 </div>
-<h2 style="text-align: center">Veteran 질의서 생성(Admin용)</h2>
+<body style="padding:50px">
+
 <div><p>질의서 제목 : </p> <input type="text" id="version_title" name="version_title" class="form-control" style="margin-left:30px; width: 500px" value="${version_title}"></div><br>
 <div>
     <button id="createQuestion" onclick="createQuestion()" style="width: 150px; height:70px; font-family: HY나무B; font-size: 1em; background-color: #8cd0d3; margin-right: 20px">대질문 생성</button>

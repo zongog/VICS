@@ -23,6 +23,47 @@
 		</if>
 	</insert>
 
+	<update id="update" parameterType="Member">
+		<if test="role == 'EA'">
+			Update ea_tb set serial_number = #{serial_number},
+			mail =
+			#{mail},
+			name = #{name},
+			pw = #{pw},
+			permission=0,
+			attachment=0
+			WHERE id =
+			#{id}
+			AND role = #{role}
+
+
+		</if>
+		<if test="role == 'CPA'">
+			Update cpa_tb set serial_number = #{serial_number},
+			mail =
+			#{mail},
+			name = #{name},
+			pw = #{pw},
+			permission=0,
+			attachment=0
+			WHERE id =
+			#{id}
+			AND role = #{role}
+
+		</if>
+		<if test="role == 'Veteran'">
+			Update Veteran_tb set serial_number = #{serial_number},
+			mail = #{mail},
+			name = #{name},
+			pw = #{pw},
+			permission=0,
+			attachment=0
+			WHERE id = #{id}
+			AND role = #{role}
+
+		</if>
+	</update>
+
 
 
 
@@ -52,11 +93,34 @@
 	</select>
 
 
+	<select id="findallea" resultType="Member" parameterType="String">
+			SELECT
+		serial_number, mail, id, pw, name, role, permission,
+		attachment
+		FROM
+		ea_tb
+	</select>
+		<select id="findallcpa" resultType="Member" parameterType="String">
+			SELECT
+		serial_number, mail, id, pw, name, role, permission,
+		attachment
+		FROM
+		cpa_tb
+	</select>
+		<select id="findallveteran" resultType="Member" parameterType="String">
+			SELECT
+		serial_number, mail, id, pw, name, role, permission,
+		attachment
+		FROM
+		veteran_tb
+	</select>
+
 
 
 	<select id="cparead" resultType="Member" parameterType="String">
 		SELECT
-		serial_number, mail, id, pw, name, role, permission, attachment
+		serial_number, mail, id, pw, name, role,veteran_tb permission,
+		attachment
 		FROM
 		cpa_tb
 		WHERE id = #{id}

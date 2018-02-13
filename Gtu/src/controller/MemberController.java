@@ -26,6 +26,14 @@ public class MemberController {
 		return "login.jsp";
 	}
 
+	@RequestMapping("/memberlist.do")
+	public ModelAndView showMusicChart(){
+		List<Member> member = service.findall();
+		ModelAndView modelAndView = new ModelAndView("memberlist.jsp");
+		modelAndView.addObject("member", member);
+		return modelAndView;
+	}
+	
 	@RequestMapping("/main")
 	public String showmain(HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -44,6 +52,21 @@ public class MemberController {
 	@RequestMapping("/joincpa.do")
 	public String showJoincpa() {
 		return "joincpa.jsp";
+	}
+	
+	@RequestMapping("/modifymember.do")
+	public String showmodifymember() {
+		return "modifymember.jsp";
+	}
+	
+	@RequestMapping(value = "/modifymember.do", method = RequestMethod.POST)
+	public String modifymember(Member member, HttpServletRequest req) { // 같은 이름으로 매핑 다른이름일 경우 데이터만 안들어가고 에러는 안난다.
+
+		service.modify(member);
+		HttpSession session = req.getSession();
+		session.setAttribute("loginedUser", member);
+
+		return "main.jsp";
 	}
 
 	@RequestMapping(value = "/joincpa.do", method = RequestMethod.POST)
