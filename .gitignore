@@ -1,8 +1,7 @@
-/README.md
+README.md
 /Gtu/target
-/Gtu/.classpath
-/Gtu/.project
-/Gtu/.settings
-/Gtu/*.txt
+*.classpath
+*.project
+
 
 
