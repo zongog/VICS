@@ -27,6 +27,16 @@ public class Member_Service_Logic implements Member_Service {
 	}
 
 	@Override
+	public boolean modify(Member member) {
+		//
+		return store.update(member);
+	}
+	
+	@Override
+	public List<Member> findall(){
+		return store.findmember();
+	}
+	@Override
 	public Member login(Member user) {
 		//
 		Member readedUser = null;
@@ -52,7 +62,7 @@ public class Member_Service_Logic implements Member_Service {
 	public List<Member> search(String name, String mail) {
 		return store.searchbymail(name, mail);
 	}
-	
+
 	@Override
 	public List<Member> findpw(String id, String name, String mail) {
 		return store.findpwbyemail(id, name, mail);

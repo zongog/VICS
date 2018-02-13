@@ -10,11 +10,14 @@ import domain.Member;
 public interface MemberMapper {
 	
 	boolean create(Member member);
+	boolean update(Member member);
 
 	Member cparead(String id);
 	Member earead(String id);
 	Member veteranread(String id);
-	
+	List<Member> findallea();
+	List<Member> findallcpa();
+	List<Member> findallveteran();
 	Member login(@Param("id")String id,@Param("role") String role, @Param("pw")String pw);
 	
 	List<Member> findincpa(@Param("username")String name, @Param("usermail")String mail);

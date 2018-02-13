@@ -32,7 +32,44 @@ public class Member_Store_logic implements Member_Store {
 			session.close();
 		}
 	}
+	
+	@Override
+	public boolean update(Member member) {
 
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		boolean flag = false;
+
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			flag = mapper.update(member);
+
+			if (flag == true) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+			return flag;
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public List<Member> findmember(){
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		List<Member> member = null;
+		try {
+		MemberMapper mapper = session.getMapper(MemberMapper.class);
+		member = mapper.findallcpa();
+		member.addAll(mapper.findallea());
+		member.addAll(mapper.findallveteran());
+		}
+		finally {
+			session.close();
+		}
+		
+		return member;
+	}
 
 	
 	@Override

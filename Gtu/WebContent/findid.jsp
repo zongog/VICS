@@ -69,36 +69,49 @@ h5 {
 
 	<div align="center">
 		<img width=912 height="250" src="resources/img/aaa.PNG">
-		<h5>아이디 찾기를 위해 이메일로 본인확인을 진행해주세요</h5>
-		<h5>가입할 때 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h5>
-		<table border=0 width=0 height="20">
-		</table>
-		<form action="${pageContext.request.contextPath}/findbynamemail.do"
-			id="findidbyname" target="_self" method="GET">
-			<table border=0 width=500 height="100">
-				<tr>
-					<td>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td><input id="name" name="username" class="form-control"
-						type="text" value="박준현"></td>
-				</tr>
-				<tr>
-					<td>이메일 주소&nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td><input id="mail" name="usermail" class="form-control"
-						type="text" value="junpark25@naver.com"></td>
-					<td>&nbsp;&nbsp;&nbsp;</td>
-					<td><input class="btn btn-default" type="button" id="mailsend"
-						value="인증번호 받기"></td>
-				</tr>
-				<tr>
-					<td>인증 번호 &nbsp;&nbsp;&nbsp;&nbsp;</td>
-					<td><input id="random" name="random" class="form-control"
-						type="text" value="" placeholder="인증번호 6자리 입력"></td>
-				</tr>
-			</table>
-			<table border=0 width=0 height="20">
-			</table>
-			<a class="btn btn-default" id="submitButton">다음</a>
-		</form>
+
+
+		<c:choose>
+			<c:when test="${member eq null}">
+				<h5>아이디 찾기를 위해 이메일로 본인확인을 진행해주세요</h5>
+				<h5>가입할 때 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h5>
+				<table border=0 width=0 height="20">
+				</table>
+				<form action="${pageContext.request.contextPath}/findbynamemail.do"
+					id="findidbyname" target="_self" method="GET">
+					<table border=0 width=500 height="100">
+						<tr>
+							<td>이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input id="name" name="username" class="form-control"
+								type="text" value="박준현"></td>
+						</tr>
+						<tr>
+							<td>이메일 주소&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input id="mail" name="usermail" class="form-control"
+								type="text" value="junpark25@naver.com"></td>
+							<td>&nbsp;&nbsp;&nbsp;</td>
+							<td><input class="btn btn-default" type="button"
+								id="mailsend" value="인증번호 받기"></td>
+						</tr>
+						<tr>
+							<td>인증 번호 &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><input id="random" name="random" class="form-control"
+								type="text" value="" placeholder="인증번호 6자리 입력"></td>
+						</tr>
+					</table>
+					<table border=0 width=0 height="20">
+					</table>
+					<a class="btn btn-default" id="submitButton">다음</a>
+				</form>
+			</c:when>
+			<c:otherwise>
+
+			</c:otherwise>
+		</c:choose>
+
+
+
+
 		<c:forEach items="${member}" var="member" varStatus="sts">
 			<tr>
 				<td><h5>귀하의 아이디는 ${member.id} Role은 ${member.role}입니다.</h5></td>

@@ -36,4 +36,7 @@
 		FROM QUESTIONNAIRE_TB
 		WHERE VERSION_TITLE = #{title}
 	</select>
+	
+	
+	
 </mapper>

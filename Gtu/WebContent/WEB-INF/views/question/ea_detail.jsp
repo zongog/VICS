@@ -332,6 +332,7 @@
 </head>
 <body style="padding:50px">
 	<%@ include file="/views/layout/menu.jsp"%>
+	<br><br>
     <div style="float:left">
 	       질의서를 선택하세요 : <select class = "form-control" style = "width:300px" name="version_title" onChange="selectReport(this.options[this.selectedIndex].value)">
 		<option>선택</option>
@@ -345,7 +346,7 @@
 		<button id="save" onclick="saveAll()" class = "form-control" style="width: 150px; height:70px; font-family: HY나무B;font-size: 1em; background-color: #d3bec8;margin-right: 20px">저장하기</button><br>
     </div>
 	
-    <div id="EA" style="width : 720px; height : 700px; float:left; margin-left: 500px" ></div>
+    <div id="EA" style="width : 720px; height : 700px; float:left; margin-left: 300px" ></div>
     <div>
         <button id="next" onclick="veteranPage()" class = "form-control">Veteran 페이지로 이동</button>
     </div>
