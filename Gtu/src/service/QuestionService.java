@@ -13,5 +13,7 @@ public interface QuestionService {
 	String selectRecentlyVersionId();
 	List<QuestionDTO> selectQuestionListById(int version_id);
 	List<QuestionDTO> selectQuestionListByTitle(String title);
+	void createEaList(QuestionAnswerDTO questionAnswerDTO);
 	List<HashMap<String, String>> selectQuestionAnswerList(String session_id);
+	List<QuestionAnswerDTO> QuestionAnswerList();
 }

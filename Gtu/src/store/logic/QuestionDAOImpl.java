@@ -53,4 +53,17 @@ public class QuestionDAOImpl implements QuestionDAO{
 		return template.selectList("question.selectQuestionAnswerList", session_id);
 	}
 
+	@Override
+	public void createEaList(QuestionAnswerDTO questionAnswerDTO) {
+		template.insert("createEaList", questionAnswerDTO);
+		
+	}
+
+
+	@Override
+	public List<QuestionAnswerDTO> QuestionAnswerList() {
+		// TODO Auto-generated method stub
+		return template.selectList("question.QuestionAnswerList");
+	}
+
 }

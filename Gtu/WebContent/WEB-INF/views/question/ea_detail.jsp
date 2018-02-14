@@ -12,6 +12,8 @@
 
 	var datagrid;
 	var SBGridProperties = {};
+	var id;//version_id
+	var title;//version_title
 	var data=[//대 질문(init 함수 후에)
 	];
 	var data_R;
@@ -262,11 +264,14 @@
 		            //데이터
 		           console.log(response);
 		           var obj = JSON.parse(response);
+		           id = obj[0].version_id;
+		           title = obj[0].version_title;
 		           console.log('version title is',obj[0].version_title);
 		           console.log('version length is',obj.length);
 		           console.log('version length2 is',Object.keys(obj).length);
 		           var objArray = new Array();
-
+		           
+		           
 		           for(var i=0; i<Object.keys(obj).length; i++){
 		        	   var tmp = new Object();
 		        	   tmp.head = obj[i].q_number;
@@ -278,6 +283,8 @@
 		        	   console.log('tmp is ',tmp);
 		        	   objArray.push(tmp);
 		           }
+		           
+		           
 		           console.log(objArray);
 		           //data_R = JSON.parse(sessionStorage.data);
 		   	       data_R = objArray;
@@ -309,7 +316,9 @@
 			var totalData = {
 					'main':JSON.stringify(data),
 					'EA':EA,
-		    		'VETERAN':VETERAN
+		    		'VETERAN':VETERAN,
+		    		'version_id':id,
+		    		//'version_title':title
 			}
 			
 		    $.ajax({

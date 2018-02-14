@@ -54,5 +54,16 @@ public class QuestionServiceImpl implements QuestionService {
 		return questionDao.selectQuestionAnswerList(session_id);
 	}
 
+	@Override
+	public void createEaList(QuestionAnswerDTO questionAnswerDTO) {
+		questionDao.createEaList(questionAnswerDTO);
+		
+	}
+
+	@Override
+	public List<QuestionAnswerDTO> QuestionAnswerList() {
+		return questionDao.QuestionAnswerList();
+	}
+
 	
 }

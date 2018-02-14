@@ -19,7 +19,7 @@
 		
 		var datagrid; 
 		var SBGridProperties;
-		var grid_data= {key1: 'asd'};
+		var data=${questionAnswerListJson};
 		
 		$(document).ready(function(){
 			__createElements();
@@ -31,18 +31,15 @@
 			SBGridProperties={};
 			SBGridProperties.parentid 			= 'SBGridArea';
 			SBGridProperties.id		  			= 'datagrid';
-			SBGridProperties.jsonref  			= 'grid_data';
-			
-			
+			SBGridProperties.jsonref  			= 'data';
 			
 			SBGridProperties.extendlastcol = 'scroll';
 			SBGridProperties.selectmode='byrow';
-			
+			SBGridProperties.rowheader = 'seq';
 			SBGridProperties.columns = [
-				{caption : ['번호'],		ref : '번호입니다.',		width : '80px',	  style : 'text-align:center',	type : 'output'},
-				{caption : ['질의서 개정 제목'],		ref : '질의서 개정제목입니다.',width : '600px',  style : 'text-align:center',	type : 'output'},
-				{caption : ['Veteran'],	ref : '베테랑입니다.',	width : '120px',	style : 'text-align:center',	type : 'output'},
-				{caption : ['등록일'],		ref : '등록일입니다.',		width : '200px',	style : 'text-align:center',	type : 'output'},
+				{caption : ['질의서 버전 번호'],		ref : "version_id" ,width : '600px',  style : 'text-align:center',	type : 'output'},
+				{caption : ['Veteran'],	ref : "interviewee_vt_id",	width : '120px',	style : 'text-align:center',	type : 'output'},
+				{caption : ['등록일'],		ref : "15",		width : '200px',	style : 'text-align:center',	type : 'output'},
 			];
 
 			datagrid = _SBGrid.create(SBGridProperties);

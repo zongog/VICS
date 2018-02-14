@@ -20,4 +20,10 @@ public interface QuestionDAO {
 	List<QuestionDTO> selectQuestionListByTitle(String title);
 
 	List<HashMap<String, String>> selectQuestionAnswerList(String session_id);
+
+	void createEaList(QuestionAnswerDTO questionAnswerDTO);
+
+	List<QuestionAnswerDTO> QuestionAnswerList();
+	
+	//List<HashMap<String, String>> QuestionAnswerList(String session_id);
 }
