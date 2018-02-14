@@ -54,12 +54,23 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<QuestionAnswerDTO> selectQuestionAnswer(String interviewee_vt_id, String interviewer_ea_id, String version_id) {
 		HashMap<String, String> hashMap = new HashMap<>();
 		hashMap.put("interviewee_vt_id", interviewee_vt_id);
 		hashMap.put("interviewer_ea_id", interviewer_ea_id);
 		hashMap.put("version_id", version_id);
 		return questionDao.selectQuestionAnswer(hashMap);
+=======
+	public void createEaList(QuestionAnswerDTO questionAnswerDTO) {
+		questionDao.createEaList(questionAnswerDTO);
+		
+	}
+
+	@Override
+	public List<QuestionAnswerDTO> QuestionAnswerList() {
+		return questionDao.QuestionAnswerList();
+>>>>>>> 87855bbbe5dccb474e766383d0942ca5a8b7a14c
 	}
 
 	

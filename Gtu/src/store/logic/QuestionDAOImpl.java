@@ -57,5 +57,16 @@ public class QuestionDAOImpl implements QuestionDAO{
 	public List<QuestionAnswerDTO> selectQuestionAnswer(HashMap<String, String> hashMap) {
 		return template.selectList("question.selectQuestionAnswer", hashMap);
 	}
+	
+	@Override	
+	public void createEaList(QuestionAnswerDTO questionAnswerDTO) {
+		template.insert("createEaList", questionAnswerDTO);
+	}
+
+	@Override
+	public List<QuestionAnswerDTO> QuestionAnswerList() {
+		// TODO Auto-generated method stub
+		return template.selectList("question.QuestionAnswerList");
+	}
 
 }

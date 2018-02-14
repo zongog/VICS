@@ -5,9 +5,10 @@ public class QuestionAnswerDTO {
 	private int version_id;
 	private String Q_number;
 	private String binary_answer;
-	private String interviewee_vt_id; 
+	private String interviewee_vt_id;
 	private String interviewer_ea_id;
 	private String question_date;
+	
 	public int getVeteran_answer_id() {
 		return veteran_answer_id;
 	}

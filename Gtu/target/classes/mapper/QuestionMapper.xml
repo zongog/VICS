@@ -50,5 +50,16 @@
 		FROM questionnaire_answer_tb
 		WHERE INTERVIEWER_EA_ID = #{interviewer_ea_id} AND INTERVIEWEE_VT_ID = #{interviewee_vt_id} AND version_id = #{version_id}
 	</select>
+	
+	<insert id="createEaList">
+		INSERT INTO QUESTIONNAIRE_ANSWER_TB(VETERAN_ANSWER_ID, VERSION_ID, Q_NUMBER, BINARY_ANSWER,INTERVIEWEE_VT_ID,INTERVIEWER_EA_ID,QUESTION_DATE)
+		VALUES(#{veteran_answer_id}, #{version_id}, #{q_number}, #{binary_answer},#{interviewee_vt_id}, #{interviewer_ea_id}, '')
+	</insert>
+	
+	<select id="QuestionAnswerList" resultType="questionAnswerDTO">
+		SELECT DISTINCT quest.version_title, answer.version_id, answer.interviewee_vt_id
+		FROM QUESTIONNAIRE_ANSWER_TB answer, QUESTIONNAIRE_TB quest
+		WHERE quest.version_id = answer.version_id
+	</select>	
 
 </mapper>

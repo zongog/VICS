@@ -1,8 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import domain.Member;
 import domain.QuestionAnswerDTO;
@@ -187,13 +190,49 @@ public class QuestionController {
 	 * EA질의서 관리 게시판 화면으로 이동
 	 * @return
 	 */
-	@RequestMapping(value = "eaList.do")
-	public String moveEaList() {
-		 return "/WEB-INF/views/question/ea_list.jsp"; 
+
+//   @RequestMapping(value = "eaList.do")
+//   public ModelAndView moveEaList(HttpSession session) {
+//      ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_list.jsp");
+//            
+//      Member memberVO = (Member) session.getAttribute("loginedUser");
+//      int session_id = memberVO.getSerial_number();
+//      List<HashMap<String, String>> answerMapList = questionService.QuestionAnswerList(Integer.toString(session_id));
+//      
+//        JSONArray jArray = new JSONArray();
+//        for (int i = 0; i < answerMapList.size(); i++) {
+//           HashMap<String, String> answerHashMap = answerMapList.get(i);
+//            JSONObject answerJSON = new JSONObject();
+//            answerJSON.putAll(answerHashMap);
+//            jArray.add(answerJSON);
+//      }
+//        mv.addObject("questionAnswerListJson", jArray);
+//        System.out.println("JARRAY : " + jArray);
+//      return mv;
+//   }
+   
+   @RequestMapping(value = "eaList.do")
+	public ModelAndView moveEaList() {
+	   ModelAndView mv=new ModelAndView("/WEB-INF/views/question/ea_list.jsp");
+	   
+		
+	   List<QuestionAnswerDTO> questionAnswerList = questionService.QuestionAnswerList();
+	   
+	   //System.out.println("version_title 출력 확인 : " + questionDTO.getVersion_title());
+	   JSONArray jArray = new JSONArray();
+	   for(QuestionAnswerDTO questionAnswerDTO : questionAnswerList) {
+		   JSONObject questionJSON = new JSONObject();
+		   questionJSON.put("version_id", questionAnswerDTO.getVersion_id());
+		   questionJSON.put("interviewee_vt_id", questionAnswerDTO.getInterviewee_vt_id());
+		   jArray.add(questionJSON);
+	   }
+	   System.out.println("jArray 출력 : " + jArray);
+	   mv.addObject("questionAnswerListJson", jArray);
+	   return mv;
 	}
-	
-  /**
-	 * EA질의서 관리 게시판 화면으로 이동
+   
+	/**
+	 * EA질의서 관리 게시판->질의서 작성 화면으로 이동
 	 * @return
 	 */
 	@RequestMapping(value = "ea.detail")
@@ -234,75 +273,51 @@ public class QuestionController {
 	   }
 		
 	   
-//	   
-//	   @RequestMapping(value = "saveEA.do" ,method = RequestMethod.POST,  produces = "application/text; charset=utf8")
-//	   @ResponseBody
-//		public void saveEa(@RequestBody String data) throws ParseException {
-//		   JSONParser parser = new JSONParser();
-//		   JSONObject jsonObj = (JSONObject) parser.parse(data);
-//		   JSONArray jsonArray = (JSONArray) parser.parse((String)jsonObj.get("main")); //main version.title 나눠서 받아옴
-//		   String version_title = (String) jsonObj.get("version_title");
-//		   String veteran_name = (String)jsonObj.get("veteran_name");
-//			
-//			// 가장 최근 version_id값 가져오기
-//			String version_id_s = questionService.selectRecentlyVersionId();
-//			System.out.println("saveEA_version_id_s: " + version_id_s);
-//			int version_id = 0;
-//			if(version_id_s == null)	// 값이 아예 없을 경우(첫 insert)
-//				version_id = 1;
-//			else 						// 값이 있을 경우 그 값의 +1
-//				version_id = Integer.parseInt(version_id_s) + 1;
-//			System.out.println("version_id: " + version_id);
-//			for (int i = 0; i < jsonArray.size(); i++) {
-//				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//				String q_number = (String) jsonObject.get("q_number");
-//				String content = (String) jsonObject.get("content");
-//				
-//				// .을 제거해준다
-//				q_number = q_number.replaceAll("\\.", "");
-//				
-//				// 새 QuestionDTO 객체를 만든다
-//				QuestionDTO questionDTO = new QuestionDTO();
-//				questionDTO.setContent(content);
-//				questionDTO.setQ_number(q_number);
-//				questionDTO.setVersion_title(version_title);
-//				questionDTO.setVersion_id(version_id);
-//				
-//				questionService.createQuestion(questionDTO);
-//			}
-//		}
-	/**
-	* EA질의서 관리 게시판->디테일 페이지 이동
-    * @return
-    */
-//   @RequestMapping(value = "eaListDetail.do")
-//   public ModelAndView selectEaDetail(String version_id) {
-//      ModelAndView mv = new ModelAndView("/WEB-INF/views/question/ea_detail.jsp");
-//      
-//      List<QuestionDTO> questionList = questionService.selectQuestionListById(Integer.parseInt(version_id));
-//      
-//      mv.addObject("version_title", questionList.get(0).getVersion_title());
-//      
-//       JSONArray jArray = new JSONArray();
-//       for (QuestionDTO questionDTO : questionList)
-//       {
-//            JSONObject questionJSON = new JSONObject();
-//            questionJSON.put("version_id", questionDTO.getVersion_id());
-//            questionJSON.put("version_title", questionDTO.getVersion_title());
-//            // q_number 사이사이에 .추가
-//            String q_number = questionDTO.getQ_number();
-//            StringBuffer sb = new StringBuffer(q_number);
-//            for (int i = 1; i < (q_number.length() * 2) - 2; i+=2) {
-//               sb.insert(i, ".");
-//            }
-//            questionJSON.put("q_number", sb.toString());
-//            questionJSON.put("content", questionDTO.getContent());
-//            jArray.add(questionJSON);
-//       }
-//       System.out.println(jArray.toString());
-//      mv.addObject("questionListJson", jArray);
-//      return mv;
-//   }
+	   
+	   int veteran_answer_id=0;//서버 돌릴 때마다 초기화해줘야 PK 중복되지 않음(ORA-00001 무결성제약에 걸리지 않음)
+	   @RequestMapping(value = "saveEA.do" ,method = RequestMethod.POST,  produces = "application/text; charset=utf8")
+	   @ResponseBody
+		public void saveEa(@RequestBody String data) throws ParseException {
+		   JSONParser parser = new JSONParser();
+		   JSONObject jsonObj = (JSONObject) parser.parse(data);
+		   System.out.println("넘어온 데이터1 : "+jsonObj.toJSONString());
+		   JSONArray jsonArray = (JSONArray) parser.parse((String)jsonObj.get("main"));
+		   System.out.println("넘어온 데이터2: "+jsonArray.toJSONString());
+		   String ea_id = (String)jsonObj.get("EA");
+		   String vt_id = (String)jsonObj.get("VETERAN");
+		   int version_id = Integer.parseInt(jsonObj.get("version_id").toString());
+		   
+			
+			for (int i = 0; i < jsonArray.size(); i++) {
+				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+				String binary_answer=(String) jsonObject.get("key4");
+				String q_number = (String) jsonObject.get("head");
+				
+				// .을 제거해준다
+				q_number = q_number.replaceAll("\\.", "");
+				
+				// 새 QuestionAnswerDTO 객체를 만든다
+				QuestionAnswerDTO questionAnswerDTO = new QuestionAnswerDTO();
+				
+				questionAnswerDTO.setVeteran_answer_id(veteran_answer_id);
+				veteran_answer_id++;
+				questionAnswerDTO.setVersion_id(version_id);
+				questionAnswerDTO.setQ_number(q_number);
+				questionAnswerDTO.setBinary_answer(binary_answer);
+				questionAnswerDTO.setInterviewee_vt_id(vt_id);
+				questionAnswerDTO.setInterviewer_ea_id(ea_id);
+				
+		
+				questionService.createEaList(questionAnswerDTO);
+			}
+			
+		}
+
+	   /**
+		 * 질의서 id값과 제목 값을 가져와 List를 출력
+		 * @return
+		 */
+	
    
    /*======================================Veteran================================*/
 	/**

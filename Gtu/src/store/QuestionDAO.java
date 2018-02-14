@@ -22,4 +22,10 @@ public interface QuestionDAO {
 	List<HashMap<String, String>> selectQuestionAnswerList(String session_id);
 
 	List<QuestionAnswerDTO> selectQuestionAnswer(HashMap<String, String> hashMap);
+	
+	void createEaList(QuestionAnswerDTO questionAnswerDTO);
+
+	List<QuestionAnswerDTO> QuestionAnswerList();
+	
+	//List<HashMap<String, String>> QuestionAnswerList(String session_id);
 }
