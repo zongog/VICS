@@ -60,8 +60,26 @@
 			attachment=0
 			WHERE id = #{id}
 			AND role = #{role}
-
 		</if>
+	</update>
+
+	<update id="changepermissionveteran" parameterType="Member">
+	Update
+	Veteran_tb set
+	permission=1
+	WHERE id = #{id}
+	</update>
+
+	<update id="changepermissioncpa" parameterType="Member">
+		Update cpa_tb set
+		permission=1
+		WHERE id = #{id}
+	</update>
+
+	<update id="changepermissionea" parameterType="Member">
+		Update ea_tb set
+		permission=1
+		WHERE id = #{id}
 	</update>
 
 
@@ -94,21 +112,21 @@
 
 
 	<select id="findallea" resultType="Member" parameterType="String">
-			SELECT
+		SELECT
 		serial_number, mail, id, pw, name, role, permission,
 		attachment
 		FROM
 		ea_tb
 	</select>
-		<select id="findallcpa" resultType="Member" parameterType="String">
-			SELECT
+	<select id="findallcpa" resultType="Member" parameterType="String">
+		SELECT
 		serial_number, mail, id, pw, name, role, permission,
 		attachment
 		FROM
 		cpa_tb
 	</select>
-		<select id="findallveteran" resultType="Member" parameterType="String">
-			SELECT
+	<select id="findallveteran" resultType="Member" parameterType="String">
+		SELECT
 		serial_number, mail, id, pw, name, role, permission,
 		attachment
 		FROM
@@ -119,8 +137,7 @@
 
 	<select id="cparead" resultType="Member" parameterType="String">
 		SELECT
-		serial_number, mail, id, pw, name, role,veteran_tb permission,
-		attachment
+		serial_number, mail, id, pw, name, role, permission, attachment
 		FROM
 		cpa_tb
 		WHERE id = #{id}
@@ -197,6 +214,22 @@
 
 
 
+
+	<delete id="deleteincpa" parameterType="String">
+		DELETE FROM CPA_TB
+		WHERE
+		ID = #{id}
+	</delete>
+	<delete id="deleteinea" parameterType="String">
+		DELETE FROM EA_TB
+		WHERE ID
+		= #{id}
+	</delete>
+	<delete id="deleteinveteran" parameterType="String">
+		DELETE FROM
+		VETERAN_TB
+		WHERE ID = #{id}
+	</delete>
 
 
 

@@ -40,19 +40,20 @@
 					<tbody>
 						<c:forEach items="${member}" var="member">
 							<tr>
-								<td class="role">${member.role}</td>
+								<td class="spanTitle">${member.role}</td>
 								<td><span class="spanTitle">${member.id}</span></td>
 								<td><span class="spanTitle">${member.name}</span></td>
 								<td><c:choose>
 										<c:when test="${member.permission eq '0'}">
-											<td><span class="spanTitle">미승인</span></td>
+											<td><a class="btn btn-xs btn-info btnPlay"
+									href="permission.do?id=${member.id}&role=${member.role}">미승인</a></td>
 										</c:when>
 										<c:otherwise>
 											<td><span class="spanTitle">승인</span></td>
 										</c:otherwise>
 									</c:choose></td>
 								<td><a class="btn btn-xs btn-info btnPlay"
-									href="addFavorite.do?musicId=${music.id}">탈퇴</a></td>
+									href="deletemember.do?id=${member.id}">탈퇴</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

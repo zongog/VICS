@@ -32,6 +32,60 @@ public class Member_Store_logic implements Member_Store {
 			session.close();
 		}
 	}
+
+	@Override
+	public void delete(String id) {
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		System.out.println("store" + id);
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+
+			mapper.deleteincpa(id);
+			System.out.println("cpa" + id);
+			
+			mapper.deleteinea(id);
+			System.out.println("ea" + id);
+			
+			mapper.deleteinveteran(id);
+			System.out.println("veterana" + id);
+			
+			session.commit();
+		}
+
+		finally
+
+		{
+			session.close();
+		}
+	}
+
+	@Override
+	public void changepermission(String id) {
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		System.out.println("store" + id);
+		
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+
+			mapper.changepermissioncpa(id);
+			System.out.println("cpa" + id);
+
+			mapper.changepermissionea(id);
+			System.out.println("ea" + id);
+
+			mapper.changepermissionveteran(id);
+			System.out.println("veteran" + id);
+
+			session.commit();
+		}
+
+		finally
+
+		{
+			session.close();
+		}
+	
+	}
 	
 	@Override
 	public boolean update(Member member) {
@@ -55,77 +109,44 @@ public class Member_Store_logic implements Member_Store {
 	}
 
 	@Override
-	public List<Member> findmember(){
+	public List<Member> findmember() {
 		SqlSession session = Gtu_session_factory.getinstance().getSession();
 		List<Member> member = null;
 		try {
-		MemberMapper mapper = session.getMapper(MemberMapper.class);
-		member = mapper.findallcpa();
-		member.addAll(mapper.findallea());
-		member.addAll(mapper.findallveteran());
-		}
-		finally {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			member = mapper.findallcpa();
+			member.addAll(mapper.findallea());
+			member.addAll(mapper.findallveteran());
+		} finally {
 			session.close();
 		}
-		
+
 		return member;
 	}
 
-	
 	@Override
 	public List<Member> searchbymail(String name, String mail) {
 		SqlSession session = Gtu_session_factory.getinstance().getSession();
 		List<Member> member = null;
-		System.out.println("name:"+name);
-		System.out.println("mail:"+mail);
+		System.out.println("name:" + name);
+		System.out.println("mail:" + mail);
 		System.out.println("logic");
 		try {
 			MemberMapper mapper = session.getMapper(MemberMapper.class);
 			if (mapper.findincpa(name, mail) != null) {
 				member = mapper.findincpa(name, mail);
-				System.out.println("name:"+name);
-				System.out.println("mail:"+mail);
+				System.out.println("name:" + name);
+				System.out.println("mail:" + mail);
 				System.out.println("cpa");
 			} else if (mapper.findinea(name, mail) != null) {
 				member = mapper.findinea(name, mail);
-				System.out.println("name:"+name);
-				System.out.println("mail:"+mail);
+				System.out.println("name:" + name);
+				System.out.println("mail:" + mail);
 				System.out.println("ea");
 			} else {
 				member = mapper.findinveteran(name, mail);
-				System.out.println("name:"+name);
-				System.out.println("mail:"+mail);
-				System.out.println("veteran");
-			}
-		} finally {
-			session.close();
-		}
-		return member;
-	}
-	
-	@Override
-	public List<Member> findpwbyemail(String id, String name, String mail) {
-		SqlSession session = Gtu_session_factory.getinstance().getSession();
-		List<Member> member = null;
-		System.out.println("name:"+name);
-		System.out.println("mail:"+mail);
-		System.out.println("logic");
-		try {
-			MemberMapper mapper = session.getMapper(MemberMapper.class);
-			if (mapper.findpwincpa(id, name, mail) != null) {
-				member = mapper.findpwincpa(id, name, mail);
-				System.out.println("name:"+name);
-				System.out.println("mail:"+mail);
-				System.out.println("cpa");
-			} else if (mapper.findpwinea(id,name, mail) != null) {
-				member = mapper.findpwinea(id,name, mail);
-				System.out.println("name:"+name);
-				System.out.println("mail:"+mail);
-				System.out.println("ea");
-			} else {
-				member = mapper.findpwinveteran(id, name, mail);
-				System.out.println("name:"+name);
-				System.out.println("mail:"+mail);
+				System.out.println("name:" + name);
+				System.out.println("mail:" + mail);
 				System.out.println("veteran");
 			}
 		} finally {
@@ -134,6 +155,36 @@ public class Member_Store_logic implements Member_Store {
 		return member;
 	}
 
+	@Override
+	public List<Member> findpwbyemail(String id, String name, String mail) {
+		SqlSession session = Gtu_session_factory.getinstance().getSession();
+		List<Member> member = null;
+		System.out.println("name:" + name);
+		System.out.println("mail:" + mail);
+		System.out.println("logic");
+		try {
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			if (mapper.findpwincpa(id, name, mail) != null) {
+				member = mapper.findpwincpa(id, name, mail);
+				System.out.println("name:" + name);
+				System.out.println("mail:" + mail);
+				System.out.println("cpa");
+			} else if (mapper.findpwinea(id, name, mail) != null) {
+				member = mapper.findpwinea(id, name, mail);
+				System.out.println("name:" + name);
+				System.out.println("mail:" + mail);
+				System.out.println("ea");
+			} else {
+				member = mapper.findpwinveteran(id, name, mail);
+				System.out.println("name:" + name);
+				System.out.println("mail:" + mail);
+				System.out.println("veteran");
+			}
+		} finally {
+			session.close();
+		}
+		return member;
+	}
 
 	@Override
 	public Member read(String id) {

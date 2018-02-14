@@ -11,7 +11,7 @@
         </div>
         	<p class="navbar-brands">${loginedUser.name}님 환영합니다.</p>
             <a class="navbar-brandss" href="${pageContext.request.contextPath}/logout.do"> [로그아웃]</a>
-            <a class="navbar-brandss" href="#">[정보수정]</a>
+            <a class="navbar-brandss" href="${pageContext.request.contextPath}/modifymember.do"">[정보수정]</a>
     </div>
 </div>
 
@@ -41,7 +41,7 @@
 		  </c:if>
 		  
 		  <li role="presentation"><a href="findAllQnA.do">QnA 게시판</a></li>
-		  <li role="presentation"><a href="#">회원 관리</a></li>
+		  <li role="presentation"><a href="${pageContext.request.contextPath}/memberlist.do">회원 관리</a></li>
 		</ul>
 	</div>
 </div>

@@ -13,4 +13,6 @@ public interface Member_Service {
 	List<Member> findall();
 	Member findbyid(String id);
 	boolean modify(Member member);
+	void deletemember(String id);
+	void permitmember(String id);
 }

@@ -20,4 +20,6 @@ public interface QuestionDAO {
 	List<QuestionDTO> selectQuestionListByTitle(String title);
 
 	List<HashMap<String, String>> selectQuestionAnswerList(String session_id);
+
+	List<QuestionAnswerDTO> selectQuestionAnswer(HashMap<String, String> hashMap);
 }

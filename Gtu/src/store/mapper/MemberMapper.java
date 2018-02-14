@@ -28,4 +28,12 @@ public interface MemberMapper {
 	List<Member> findpwincpa(@Param("userid")String id, @Param("username")String name, @Param("usermail")String mail);
 	List<Member> findpwinea(@Param("userid")String id, @Param("username")String name, @Param("usermail")String mail);
 	List<Member> findpwinveteran(@Param("userid")String id, @Param("username")String name, @Param("usermail")String mail);
+	void deleteincpa(String id);
+	void deleteinea(String id);
+	void deleteinveteran(String id);
+	
+	void changepermissionea(String id);
+	void changepermissioncpa(String id);
+	void changepermissionveteran(String id);
+	
 }

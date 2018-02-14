@@ -38,11 +38,17 @@
 	</select>
 	
 	<select id="selectQuestionAnswerList" parameterType="string" resultType="java.util.HashMap">
-		SELECT DISTINCT answer.version_id, answer.question_date, answer.name, question.version_title
+		SELECT DISTINCT answer.version_id, answer.question_date, answer.name, answer.interviewer_ea_id, question.version_title
 		FROM (SELECT QUESTIONNAIRE_ANSWER_TB.version_id, interviewee_vt_id, interviewer_ea_id, question_date, name
 		      FROM QUESTIONNAIRE_ANSWER_TB, EA_TB
 		      WHERE interviewee_vt_id='1111' AND EA_TB.SERIAL_NUMBER = '1111') answer, Questionnaire_tb question
 		WHERE answer.version_id = question.version_id
+	</select>
+	
+	<select id="selectQuestionAnswer" parameterType="java.util.HashMap" resultType="questionAnswerDTO">
+		SELECT q_number, binary_answer
+		FROM questionnaire_answer_tb
+		WHERE INTERVIEWER_EA_ID = #{interviewer_ea_id} AND INTERVIEWEE_VT_ID = #{interviewee_vt_id} AND version_id = #{version_id}
 	</select>
 
 </mapper>

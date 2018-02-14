@@ -27,13 +27,13 @@ public class MemberController {
 	}
 
 	@RequestMapping("/memberlist.do")
-	public ModelAndView showMusicChart(){
+	public ModelAndView showMusicChart() {
 		List<Member> member = service.findall();
 		ModelAndView modelAndView = new ModelAndView("memberlist.jsp");
 		modelAndView.addObject("member", member);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/main")
 	public String showmain(HttpServletRequest req) {
 		HttpSession session = req.getSession();
@@ -53,12 +53,12 @@ public class MemberController {
 	public String showJoincpa() {
 		return "joincpa.jsp";
 	}
-	
+
 	@RequestMapping("/modifymember.do")
 	public String showmodifymember() {
 		return "modifymember.jsp";
 	}
-	
+
 	@RequestMapping(value = "/modifymember.do", method = RequestMethod.POST)
 	public String modifymember(Member member, HttpServletRequest req) { // 같은 이름으로 매핑 다른이름일 경우 데이터만 안들어가고 에러는 안난다.
 
@@ -80,6 +80,7 @@ public class MemberController {
 
 		return "login.jsp";
 	}
+
 	@RequestMapping(value = "/joinea.do", method = RequestMethod.POST)
 	public String joinea(Member member) { // 같은 이름으로 매핑 다른이름일 경우 데이터만 안들어가고 에러는 안난다.
 
@@ -91,6 +92,7 @@ public class MemberController {
 
 		return "login.jsp";
 	}
+
 	@RequestMapping(value = "/joinveteran.do", method = RequestMethod.POST)
 	public String joinveteran(Member member) { // 같은 이름으로 매핑 다른이름일 경우 데이터만 안들어가고 에러는 안난다.
 
@@ -103,12 +105,11 @@ public class MemberController {
 		return "login.jsp";
 	}
 
-
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String login(Member member, HttpServletRequest req) {
 
 		Member loginedUser = service.login(member);
-		
+
 		if (loginedUser != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("loginedUser", loginedUser);
@@ -128,19 +129,36 @@ public class MemberController {
 		modelAndView.addObject("member", member);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/findpwbyemail.do")
-	public ModelAndView searchpw(@RequestParam("userid") String id, @RequestParam("username") String name, @RequestParam("usermail") String mail) {
+	public ModelAndView searchpw(@RequestParam("userid") String id, @RequestParam("username") String name,
+			@RequestParam("usermail") String mail) {
 		List<Member> member = service.findpw(id, name, mail);
 		ModelAndView modelAndView = new ModelAndView("findpw.jsp");
 		modelAndView.addObject("member", member);
 		return modelAndView;
 	}
 
+	@RequestMapping("/deletemember.do")
+	public String deletemember(@RequestParam("id") String id) {
+		System.out.println("controller" + id);
+		service.deletemember(id);
+
+		return "memberlist.do";
+	}
+	
+	@RequestMapping("/permission.do")
+	public String permitmember(@RequestParam("id") String id) {
+		System.out.println("controller" + id);
+		service.permitmember(id);
+
+		return "memberlist.do";
+	}
+
 	@RequestMapping("/checkId.do")
 	public ModelAndView idcheck(@RequestParam("id") String id) {
 		System.out.println("id" + id);
-		Member member=null;
+		Member member = null;
 		member = service.findbyid(id);
 		String idcheckment;
 		if (member == null) {
@@ -152,11 +170,11 @@ public class MemberController {
 		modelAndView.addObject("idcheckment", idcheckment);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/joincheckId.do")
 	public ModelAndView joinidcheck(@RequestParam("id") String id) {
 		System.out.println("id" + id);
-		Member member=null;
+		Member member = null;
 		member = service.findbyid(id);
 		String idcheckment;
 		if (member == null) {
@@ -181,7 +199,7 @@ public class MemberController {
 		System.out.println("START");
 		return "findid.jsp";
 	}
-	
+
 	@RequestMapping("/findpw.do")
 	public String showfindpw() {
 		System.out.println("START");

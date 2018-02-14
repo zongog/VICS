@@ -305,6 +305,11 @@ public class QuestionController {
 //   }
    
    /*======================================Veteran================================*/
+	/**
+	 * Veteran) 자기가 응답한 질의서 목록보기
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "veteranList.do")
 	public ModelAndView moveVeteranList(HttpSession session) {
 		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/veteran_list.jsp");
@@ -325,15 +330,50 @@ public class QuestionController {
 		return mv;
 	}
 	
+	/**
+	 * Veteran) 자기가 응답한 질의서 상세사항 보기
+	 * @param version_id
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "questionAnswerDetail.do")
-	public ModelAndView questionAnswerDetail(String version_id, HttpSession session) {
+	public ModelAndView questionAnswerDetail(String version_id, String interviewer_ea_id, HttpSession session) {
 		ModelAndView mv = new ModelAndView("/WEB-INF/views/question/veteran_detail.jsp");
 		
 		Member memberVO = (Member) session.getAttribute("loginedUser");
 		int session_id = memberVO.getSerial_number();
-		System.out.println(session_id);
-		System.out.println(version_id);
+		List<QuestionDTO> questionDTOList = questionService.selectQuestionListById(Integer.parseInt(version_id));
+		List<QuestionAnswerDTO> answerDTOList = questionService.selectQuestionAnswer(Integer.toString(session_id), interviewer_ea_id, version_id);
 		
+		System.out.println(questionDTOList.toString());
+		System.out.println(answerDTOList.toString());
+		
+
+	    JSONArray jArray = new JSONArray();
+	    for (int i = 0; i < questionDTOList.size(); i++) {
+	    	QuestionDTO tempQuestionDTO = questionDTOList.get(i);
+	    	QuestionAnswerDTO tempQuestionAnswerDTO = answerDTOList.get(i);
+	        JSONObject questionJSON = new JSONObject();
+
+	        // q_number 사이사이에 .추가
+	        StringBuffer sb = new StringBuffer(tempQuestionDTO.getQ_number());
+	        for (int j = 1; j < (tempQuestionDTO.getQ_number().length() * 2) - 2; j+=2) {
+	           sb.insert(j, ".");
+	        }
+	        // jsonObject 질문번호(q_number) 추가
+	        questionJSON.put("q_number", sb.toString());
+	        
+	        // jsonObject 질문항목(content) 추가
+	        questionJSON.put("content", tempQuestionDTO.getContent());
+	        
+	        // jsonObject 응답 값(binary_answer) 추가
+	        questionJSON.put("binary_answer", tempQuestionAnswerDTO.getBinary_answer());
+	        
+	        // jArray에 추가
+	        jArray.add(questionJSON);
+		}
+		
+		mv.addObject("veteranAnswerJson", jArray);
 		return mv;
 	}
 	

@@ -53,4 +53,9 @@ public class QuestionDAOImpl implements QuestionDAO{
 		return template.selectList("question.selectQuestionAnswerList", session_id);
 	}
 
+	@Override
+	public List<QuestionAnswerDTO> selectQuestionAnswer(HashMap<String, String> hashMap) {
+		return template.selectList("question.selectQuestionAnswer", hashMap);
+	}
+
 }

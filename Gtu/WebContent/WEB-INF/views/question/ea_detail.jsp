@@ -7,7 +7,6 @@
 <head>
     <meta charset="UTF-8">
 	<%@ include file="/WEB-INF/views/layout/common.jsp"%>
-    <!-- <link href="${pageContext.request.contextPath}/resources/SBGrid/css/SBGrid_BOWON.css" rel="stylesheet" type="text/css"> -->
 	<script type="text/javascript">
 
 	var datagrid;

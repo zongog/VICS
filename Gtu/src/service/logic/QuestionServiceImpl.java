@@ -50,8 +50,16 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public List<HashMap<String, String>> selectQuestionAnswerList(String session_id) {
-		// TODO Auto-generated method stub
 		return questionDao.selectQuestionAnswerList(session_id);
+	}
+
+	@Override
+	public List<QuestionAnswerDTO> selectQuestionAnswer(String interviewee_vt_id, String interviewer_ea_id, String version_id) {
+		HashMap<String, String> hashMap = new HashMap<>();
+		hashMap.put("interviewee_vt_id", interviewee_vt_id);
+		hashMap.put("interviewer_ea_id", interviewer_ea_id);
+		hashMap.put("version_id", version_id);
+		return questionDao.selectQuestionAnswer(hashMap);
 	}
 
 	

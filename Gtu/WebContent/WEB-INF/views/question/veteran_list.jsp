@@ -42,6 +42,7 @@
 				{caption : ['질의서 버전 번호'],		ref : 'VERSION_ID',		width : '120px',	  style : 'text-align:center',	type : 'output'},
 				{caption : ['질의서 버전 제목'],		ref : 'VERSION_TITLE',width : '400px',  style : 'text-align:center',	type : 'output'},
 				{caption : ['담당EA'],	ref : 'NAME',	width : '120px',	style : 'text-align:center',	type : 'output'},
+				{caption : ['담당EA 시리얼 번호'],	ref : 'INTERVIEWER_EA_ID',	width : '120px',	style : 'text-align:center',	type : 'output', hidden : true},
 				{caption : ['등록일'],		ref : 'QUESTION_DATE',		width : '200px',	style : 'text-align:center',	type : 'output'}
 			];
 
@@ -65,7 +66,7 @@
 				return;
 	        if(datagrid.getCellData(datagrid.getMouseRow(), 1) == null)
 	       		return;
-			location.href="${pageContext.request.contextPath}/questionAnswerDetail.do?version_id="+datagrid.getCellData(datagrid.getMouseRow(), 1);
+			location.href="${pageContext.request.contextPath}/questionAnswerDetail.do?version_id="+datagrid.getCellData(datagrid.getMouseRow(), 1)+"&interviewer_ea_id="+datagrid.getCellData(datagrid.getMouseRow(), 4);
 		}
 		
 		

@@ -88,7 +88,7 @@ body {
 						});
 	</script>
 
-	<h3>CPA 회원가입</h3>
+	<h3>정보 수정</h3>
 	<br>
 	<form name="form" id="form"
 		action="${pageContext.request.contextPath}/modifymember.do" method="post">

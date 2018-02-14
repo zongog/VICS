@@ -12,5 +12,7 @@ public interface Member_Store {
 	Member read(String id);
 	Member login(String id, String role, String pw);
 	boolean update(Member member);
+	void delete(String id);
+	void changepermission(String id);
 
 }

@@ -57,7 +57,18 @@ public class Member_Service_Logic implements Member_Service {
 		}
 		return true;
 	}
-
+	
+	@Override
+	public void deletemember(String id) {
+		System.out.println("service" + id);
+		store.delete(id);
+	}
+	@Override
+	public void permitmember(String id) {
+		System.out.println("service" + id);
+		store.changepermission(id);
+	}
+	
 	@Override
 	public List<Member> search(String name, String mail) {
 		return store.searchbymail(name, mail);
